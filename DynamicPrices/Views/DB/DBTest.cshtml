@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "DataBase Test";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Aici se va testa baza de date!</p>
+<p>>@ViewBag.Message</p>
+@model List<Dictionary<string, object>>
+
+<table border="1">
+    <tr>
+        @foreach (var column in Model[0])
+        {
+            <th>@column.Key</th>
+        }
+    </tr>
+    @foreach (var row in Model)
+    {
+        <tr>
+            @foreach (var cell in row)
+            {
+                <td>@cell.Value</td>
+            }
+        </tr>
+    }
+</table>
