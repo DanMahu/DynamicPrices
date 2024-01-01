@@ -1,0 +1,23 @@
+﻿<link rel="stylesheet" href="~/css/produse-style.css" />
+<div class="container-produse">
+    <div class="sidebar">
+        <div class="dropdown-produse">
+            <button class="button-produse" onclick="showTipProduse()">Produse</button>
+            <div id="p-dropdown" class="dropdown-content">
+                <a href="#electronice">Electronice</a>
+                <a href="#n2">Produs2</a>
+                <a href="#n3">Produs3</a>
+            </div>
+        </div>
+        <div class="dropdown-tip-produs"></div>
+    </div>
+    <div class="container-info">
+        @{
+            ViewData["Title"] = "Produse";
+        }
+        <h1>@ViewData["Title"]</h1>
+        <p>Aici vor fi produsele</p>
+    </div>
+</div>
+
+<script src="~/js/script-produse.js"></script>

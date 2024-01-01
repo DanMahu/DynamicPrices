@@ -1,0 +1,111 @@
+﻿body {
+    /*background-color: gainsboro;*/
+    /*background-image: url("https://images.wallpaperscraft.com/image/single/forest_trees_fog_110131_4928x3264.jpg");
+    background-size: cover;*/
+    background-image: linear-gradient( 110.3deg, rgba(73,93,109,1) 4.3%, rgba(49,55,82,1) 96.7% );
+    /*alt bg*/
+    /*background-image: radial-gradient( circle 993px at 0.5% 50.5%,  rgba(137,171,245,0.37) 0%, rgba(245,247,252,1) 100.2% );*/
+}
+
+.container-produse {
+    display: flex;
+    flex-direction: row;
+}
+
+.sidebar {
+    width: 13%;
+    margin-left: 0.5em;
+    height: 35em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* border: 1px solid rgb(41, 41, 41);*/
+    border: 1px solid rgb(27, 62, 96);
+    border-radius: 5px;
+    background-image: radial-gradient( circle 1224px at 10.6% 8.8%, rgba(255,255,255,1) 0%, rgba(153,202,251,1) 100.2% );
+}
+
+.dropdown-produse, .dropdown-tip-produs {
+    position: relative;
+    display: inline-block;
+    margin-top: 0.5em;
+}
+
+.dropdown-tip-produs {
+    margin-top: 1em;
+}
+
+.button-produse {
+    background-color: rgb(47, 47, 47);
+    color: white;
+    font-size: 1.2vw;
+    cursor: pointer;
+    width: 100%;
+    height: auto;
+    border-radius: 3px;
+    border: 1px solid rgb(182, 182, 182, 0.73);
+    text-indent: 0.5em;
+    text-align: left;
+}
+
+.dropdown-content {
+    background-color: ghostwhite;
+    display: none;
+    position: relative;
+    width: 100%;
+    overflow: auto;
+    border-radius: 3px;
+    border-left: 1px solid rgb(27, 62, 96);
+    border-right: 1px solid rgb(27, 62, 96);
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 0.2em 1em;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid rgb(27, 62, 96);
+    font-size: 1.1vw;
+}
+
+.dropdown-produse a:hover {
+    background-color: #ddd;
+}
+
+.show {
+    display: block;
+}
+
+.button-produse::after {
+    content: '';
+    display: inline-block;
+    border: 0.4em solid transparent;
+    border-top-color: white;
+    position: relative;
+    top: 0.2em;
+    margin-left: 4.5em;
+    transition: transform 0.4s ease;
+}
+
+@media (max-width: 768px) {
+    .button-produse::after {
+        margin-left: 3em;
+    }
+    .button-produse {
+        height: 2.5em;
+    }
+}
+
+.dropdown-produse.open .button-produse::after {
+    transform: rotate(180deg);
+}
+
+.container-info {
+    /*border: 1px solid rgb(41, 41, 41);*/
+    border: 1px solid rgb(27, 62, 96);
+    border-radius: 5px;
+    background-image: radial-gradient( circle 1224px at 10.6% 8.8%, rgba(255,255,255,1) 0%, rgba(153,202,251,1) 100.2% );
+    width: 85.2%;
+    margin-left: 0.6%;
+    font-size: 1vw;
+}

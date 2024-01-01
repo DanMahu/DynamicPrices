@@ -1,0 +1,16 @@
+﻿body {
+    background-image: url("https://images.wallpaperscraft.com/image/single/mountains_peaks_hills_1127108_1920x1080.jpg");
+    background-size: cover;
+}
+
+.display-4 {
+    margin-top: 20%;
+    font-size: 5vw;
+    font-weight: bold;
+    color: rgb(237, 224, 208, 0.47);
+    -webkit-text-stroke: thin;
+    -webkit-text-stroke-color: rgb(212, 211, 207);
+    -webkit-text-stroke-width: 1.2px;
+    letter-spacing: 3px;
+    text-shadow: 1.5px 1.5px 5px rgb(214, 213, 211);
+}
