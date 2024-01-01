@@ -4,12 +4,29 @@
         <div class="dropdown-produse">
             <button class="button-produse" onclick="showTipProduse()">Produse</button>
             <div id="p-dropdown" class="dropdown-content">
-                <a href="#electronice">Electronice</a>
+                <a href="#electronice" onclick="showMenu('electronice')">Electronice</a>
                 <a href="#n2">Produs2</a>
                 <a href="#n3">Produs3</a>
             </div>
         </div>
-        <div class="dropdown-tip-produs"></div>
+        <div class="dropdown-tip-produse" id="electronice">
+            <button class="button-tip-produse" id="btt-tip-produse" onclick="showElectronice()">Electronice</button>
+            <div id="tip-dropdown" class="tip-dropdown-content">
+                @{
+                    if (ViewBag.tipuriProduseElectronice != null)
+                    {
+                        foreach (var pair in ViewBag.tipuriProduseElectronice)
+                        {
+                            <a href="#@(pair.Key)" onclick="">@pair.Key (@pair.Value)</a>
+                        }
+                    }
+                    else
+                    {
+                        <a href="#">-EROARE-</a>
+                    }
+                }
+            </div>
+        </div>
     </div>
     <div class="container-info">
         @{

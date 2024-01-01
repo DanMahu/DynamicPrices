@@ -8,10 +8,12 @@ namespace DynamicPrices.Controllers
     public class DBController : Controller
     {
         private readonly IConfiguration _configuration;
+        private readonly IProduseService _produseService;
 
-        public DBController(IConfiguration configuration)
+        public DBController(IConfiguration configuration, IProduseService produseService)
         {
             _configuration = configuration;
+            _produseService = produseService;
         }
 
         // GET: DBController
@@ -26,6 +28,9 @@ namespace DynamicPrices.Controllers
         }
         public IActionResult Produse()
         {
+            Dictionary<string, int> tipuriProduse = _produseService.GetTipProduseElectronice();
+            ViewBag.tipuriProduseElectronice = tipuriProduse;
+
             return View();
         }
 

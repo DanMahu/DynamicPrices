@@ -25,17 +25,13 @@
     background-image: radial-gradient( circle 1224px at 10.6% 8.8%, rgba(255,255,255,1) 0%, rgba(153,202,251,1) 100.2% );
 }
 
-.dropdown-produse, .dropdown-tip-produs {
+.dropdown-produse, .dropdown-tip-produse {
     position: relative;
     display: inline-block;
     margin-top: 0.5em;
 }
 
-.dropdown-tip-produs {
-    margin-top: 1em;
-}
-
-.button-produse {
+.button-produse, .button-tip-produse {
     background-color: rgb(47, 47, 47);
     color: white;
     font-size: 1.2vw;
@@ -48,7 +44,11 @@
     text-align: left;
 }
 
-.dropdown-content {
+#electronice {
+    display: none;
+}
+
+.dropdown-content, .tip-dropdown-content {
     background-color: ghostwhite;
     display: none;
     position: relative;
@@ -59,7 +59,7 @@
     border-right: 1px solid rgb(27, 62, 96);
 }
 
-.dropdown-content a {
+.dropdown-content a, .tip-dropdown-content a {
     color: black;
     padding: 0.2em 1em;
     text-decoration: none;
@@ -68,7 +68,7 @@
     font-size: 1.1vw;
 }
 
-.dropdown-produse a:hover {
+.dropdown-produse a:hover, .dropdown-tip-produse a:hover {
     background-color: #ddd;
 }
 
@@ -76,7 +76,7 @@
     display: block;
 }
 
-.button-produse::after {
+.button-produse::after, .button-tip-produse::after {
     content: '';
     display: inline-block;
     border: 0.4em solid transparent;
@@ -87,17 +87,33 @@
     transition: transform 0.4s ease;
 }
 
+.dropdown-produse.open .button-produse::after,
+.dropdown-tip-produse.open .button-tip-produse::after {
+    transform: rotate(180deg);
+}
+
 @media (max-width: 768px) {
     .button-produse::after {
         margin-left: 3em;
     }
-    .button-produse {
+    .button-tip-produse::after {
+        margin-left: 2em;
+    }
+    .button-produse, .button-tip-produse {
         height: 2.5em;
+    }
+    .dropdown-tip-produse {
+        margin-top: 1%;
     }
 }
 
-.dropdown-produse.open .button-produse::after {
-    transform: rotate(180deg);
+@media (min-width: 768px) {
+    .button-tip-produse::after {
+        margin-left: 3.3em;
+    }
+    .dropdown-tip-produse {
+        margin-top: 0.5em;
+    }
 }
 
 .container-info {
