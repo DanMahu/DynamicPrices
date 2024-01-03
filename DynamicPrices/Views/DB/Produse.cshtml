@@ -1,5 +1,5 @@
 ﻿<link rel="stylesheet" href="~/css/produse-style.css" />
-<div class="container-produse">
+<div class="page-container">
     <div class="sidebar">
         <div class="dropdown-produse">
             <button class="button-produse" onclick="showTipProduse()">Produse</button>
@@ -17,7 +17,7 @@
                     {
                         foreach (var pair in ViewBag.tipuriProduseElectronice)
                         {
-                            <a href="#@(pair.Key)" onclick="">@pair.Key (@pair.Value)</a>
+                            <a href="#@(pair.Key)" onclick="showProductsByType('@(pair.Key)')">@pair.Key (@pair.Value)</a>
                         }
                     }
                     else
@@ -28,12 +28,10 @@
             </div>
         </div>
     </div>
-    <div class="container-info">
-        @{
-            ViewData["Title"] = "Produse";
-        }
-        <h1>@ViewData["Title"]</h1>
-        <p>Aici vor fi produsele</p>
+    <div class="container-produse">
+        <div class="container-info">
+           
+        </div>
     </div>
 </div>
 

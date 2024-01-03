@@ -7,7 +7,7 @@
     /*background-image: radial-gradient( circle 993px at 0.5% 50.5%,  rgba(137,171,245,0.37) 0%, rgba(245,247,252,1) 100.2% );*/
 }
 
-.container-produse {
+.page-container {
     display: flex;
     flex-direction: row;
 }
@@ -97,7 +97,7 @@
         margin-left: 3em;
     }
     .button-tip-produse::after {
-        margin-left: 2em;
+        margin-left: 1.5em;
     }
     .button-produse, .button-tip-produse {
         height: 2.5em;
@@ -109,14 +109,14 @@
 
 @media (min-width: 768px) {
     .button-tip-produse::after {
-        margin-left: 3.3em;
+        margin-left: 3em;
     }
     .dropdown-tip-produse {
         margin-top: 0.5em;
     }
 }
 
-.container-info {
+.container-produse {
     /*border: 1px solid rgb(41, 41, 41);*/
     border: 1px solid rgb(27, 62, 96);
     border-radius: 5px;
@@ -124,4 +124,53 @@
     width: 85.2%;
     margin-left: 0.6%;
     font-size: 1vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
+.container-info {
+    margin-top: 0.3em;
+    width: 99%;
+    height: 98%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.tabel-produse {
+    border-left: 2px solid gray;
+    border-right: 2px solid gray;
+}
+
+.tabel-produse thead {
+    text-align: center;
+    background-color: rgb(47, 47, 47);
+    color: white;
+}
+
+.tabel-produse thead td {
+    border: 2px solid gray;
+}
+
+.tabel-produse td {
+    text-align: center;
+}
+
+.tabel-produse tr {
+    border-bottom: 2px solid gray;
+}
+
+.tabel-produse tr .nr-produs {
+    width: 2.5em;
+}
+
+.tabel-produse tr .descriere-produs {
+    text-align: justify;
+}
+/*.produs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 1.2vw;
+}*/

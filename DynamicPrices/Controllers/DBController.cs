@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
-using System.Data;
+using Newtonsoft.Json;
 
 namespace DynamicPrices.Controllers
 {
@@ -28,10 +28,18 @@ namespace DynamicPrices.Controllers
         }
         public IActionResult Produse()
         {
+            //lista de produse electronice
             Dictionary<string, int> tipuriProduse = _produseService.GetTipProduseElectronice();
             ViewBag.tipuriProduseElectronice = tipuriProduse;
 
             return View();
+        }
+
+        public IActionResult ProduseElectronice(string tipProdus)
+        {
+            //lista de produse electronice dupa tip
+            List<Dictionary<string, object>> produseDupaTip = _produseService.GetProduseDupaTip(tipProdus);
+            return Json(produseDupaTip);
         }
 
         public IActionResult DBTest()
