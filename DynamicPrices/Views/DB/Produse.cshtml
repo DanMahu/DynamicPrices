@@ -1,10 +1,12 @@
 ﻿<link rel="stylesheet" href="~/css/produse-style.css" />
+@model List<NumeProdusModel>
+
 <div class="page-container">
     <div class="sidebar">
         <div class="dropdown-produse">
             <button class="button-produse" onclick="showTipProduse()">Produse</button>
             <div id="p-dropdown" class="dropdown-content">
-                <a href="#electronice" onclick="showMenu('electronice')">Electronice</a>
+                <a href="#Electronice" onclick="showMenu('electronice')">Electronice</a>
                 <a href="#n2">Produs2</a>
                 <a href="#n3">Produs3</a>
             </div>
@@ -27,11 +29,13 @@
                 }
             </div>
         </div>
+        <div class="dropdown-tip-produse" id="istoric-preturi">
+            <button class="button-istoric-pret" id="btt-istoric-pret" onclick="showProduse()">Istoric Prețuri</button>
+            <div id="istoric-dropdown" class="istoric-dropdown-content"></div>
+        </div>
     </div>
     <div class="container-produse">
-        <div class="container-info">
-           
-        </div>
+        <div class="container-info"></div>
     </div>
 </div>
 

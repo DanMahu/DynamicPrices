@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using DynamicPrices.Models;
+using MySql.Data.MySqlClient;
 
 namespace DynamicPrices
 {
@@ -41,7 +42,8 @@ namespace DynamicPrices
             List<Dictionary<string, object>> produse = new List<Dictionary<string, object>>();
             using (MySqlConnection connection = _databaseService.GetConnection())
             {
-                string sql = "select * from produse_electronice where tip_produs = @tipProdus";
+                //string sql = "select * from produse_electronice where tip_produs = @tipProdus";
+                string sql = "select p.nume_produs, p.tip_produs, p.cost_producere, p.pret_recomandat, p.descriere, pe.pret_curent from produse_electronice p join preturi_electronice pe on p.id_produs = pe.id_produs where p.tip_produs = @tipProdus";
                 using (MySqlCommand command = new MySqlCommand(sql, connection))
                 {
                     command.Parameters.AddWithValue("@tipProdus", tipProdus);
@@ -64,5 +66,27 @@ namespace DynamicPrices
             return produse;
         }
 
+        public List<string> GetProduseElectronice(string tipProdus)
+        {
+            List<string> produse = new List<string>();
+            using (MySqlConnection connection = _databaseService.GetConnection())
+            {
+                string sql = "select p.nume_produs from produse_electronice p where tip_produs = @tipProdus";
+                using (MySqlCommand command = new MySqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@tipProdus", tipProdus);
+                    connection.Open();
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string produs = reader.GetString("nume_produs");
+                            produse.Add(produs);
+                        }
+                    }
+                }
+            }
+            return produse;
+        }
     }
 }

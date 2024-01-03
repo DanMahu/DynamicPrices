@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Content Remove="wwwroot\js\script-produse.js" />
+    <Content Remove="wwwroot\js\script-servicii.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -15,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\js\script-servicii.js" />
     <None Include="wwwroot\js\script-produse.js" />
   </ItemGroup>
 

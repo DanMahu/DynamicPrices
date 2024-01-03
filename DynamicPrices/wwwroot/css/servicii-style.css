@@ -25,13 +25,13 @@
     background-image: radial-gradient( circle 1224px at 10.6% 8.8%, rgba(255,255,255,1) 0%, rgba(153,202,251,1) 100.2% );
 }
 
-.dropdown-produse, .dropdown-tip-produse {
+.dropdown-servicii, .dropdown-tip-servicii {
     position: relative;
     display: inline-block;
     margin-top: 0.5em;
 }
 
-.button-produse, .button-tip-produse, .button-istoric-pret {
+.button-servicii, .button-tip-servicii {
     background-color: rgb(47, 47, 47);
     color: white;
     font-size: 1.2vw;
@@ -44,11 +44,11 @@
     text-align: left;
 }
 
-#electronice, #istoric-preturi {
+#publicitate {
     display: none;
 }
 
-.dropdown-content, .tip-dropdown-content, .istoric-dropdown-content {
+.dropdown-content, .tip-dropdown-content {
     background-color: ghostwhite;
     display: none;
     position: relative;
@@ -68,17 +68,7 @@
     font-size: 1.1vw;
 }
 
-.istoric-dropdown-content a {
-    width: 15em;
-    font-size: 0.8vw;
-    color: black;
-    text-decoration: none;
-    display: block;
-    padding: 0.5em 1em;
-    border-bottom: 1px solid rgb(27, 62, 96);
-}
-
-.dropdown-produse a:hover, .dropdown-tip-produse a:hover{
+.dropdown-servicii a:hover, .dropdown-tip-servicii a:hover {
     background-color: #ddd;
 }
 
@@ -86,7 +76,7 @@
     display: block;
 }
 
-.button-produse::after, .button-tip-produse::after, .button-istoric-pret::after {
+.button-servicii::after, .button-tip-servicii::after {
     content: '';
     display: inline-block;
     border: 0.4em solid transparent;
@@ -97,58 +87,36 @@
     transition: transform 0.4s ease;
 }
 
-.dropdown-produse.open .button-produse::after,
-.dropdown-tip-produse.open .button-tip-produse::after,
-.dropdown-tip-produse.open .button-istoric-pret::after {
+.dropdown-servicii.open .button-servicii::after,
+.dropdown-tip-servicii.open .button-tip-servicii::after {
     transform: rotate(180deg);
 }
 
-.search-bar {
-    width: 10.95em;
-    border: none;
-    border-bottom: 1px solid rgb(27, 62, 96);
-    outline: none;
-    font-size: 1.1vw;
-    padding-left: 0.5em;
-    display: block;
-    background-color: transparent;
-}
-
 @media (max-width: 768px) {
-    .button-produse::after {
+    .button-servicii::after {
         margin-left: 3em;
     }
-    .button-tip-produse::after {
+    .button-tip-servicii::after {
         margin-left: 1.5em;
     }
-    .button-istoric-pret::after {
-        margin-left: 0.4em;
-    }
-    .button-produse, .button-tip-produse, .button-istoric-pret {
+    .button-servicii, .button-tip-servicii {
         height: 2.5em;
     }
-    .dropdown-tip-produse {
+    .dropdown-tip-servicii {
         margin-top: 1%;
-    }
-    .search-bar {
-        width: 10.75em;
-        height: 2em;
     }
 }
 
 @media (min-width: 768px) {
-    .button-tip-produse::after {
+    .button-tip-servicii::after {
         margin-left: 3em;
     }
-    .button-istoric-pret::after {
-        margin-left: 1.95em;
-    }
-    .dropdown-tip-produse {
+    .dropdown-tip-servicii {
         margin-top: 0.5em;
     }
 }
 
-.container-produse {
+.container-servicii {
     /*border: 1px solid rgb(41, 41, 41);*/
     border: 1px solid rgb(27, 62, 96);
     border-radius: 5px;
@@ -170,56 +138,44 @@
     justify-content: flex-start;
 }
 
-.tabel-produse {
+.tabel-servicii {
     border-left: 2px solid gray;
     border-right: 2px solid gray;
 }
 
-.tabel-produse thead {
+.tabel-servicii thead {
     text-align: center;
     background-color: rgb(47, 47, 47);
     color: white;
 }
 
-.tabel-produse thead th {
+.tabel-servicii thead th {
     border: 2px solid gray;
 }
 
-.tabel-produse thead .p-h-1 {
+.tabel-servicii thead .s-h-1 {
     width: 2.5em;
 }
 
-.tabel-produse thead .p-h-2 {
-    width: 20em;
+.tabel-servicii thead .s-h-2 {
+    width: 23em;
 }
 
-.tabel-produse thead .p-h-3,
-.tabel-produse thead .p-h-4 {
-    width: 9em;
+.tabel-servicii thead .s-h-3,
+.tabel-servicii thead .s-h-4 {
+    width: 10em;
 }
 
-.tabel-produse thead .p-h-5 {
-    
-}
-
-.tabel-produse thead .p-h-6 {
-    width: 8em;
-}
-
-.tabel-produse td {
+.tabel-servicii td {
     text-align: center;
 }
 
-.tabel-produse .p-row {
+.tabel-servicii .s-row {
     border-bottom: 2px solid gray;
     height: 3.5em;
 }
 
-.tabel-produse tr .descriere-produs {
+.tabel-servicii tr .descriere-produs {
     text-align: justify;
     padding: 0 0.6em 0 0.6em;
-}
-
-.tabel-produse tr .pret-curent-produs {
-    font-weight: bold;
 }

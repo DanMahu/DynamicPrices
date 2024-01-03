@@ -1,0 +1,24 @@
+﻿<link rel="stylesheet" href="~/css/servicii-style.css" />
+<div class="page-container">
+    <div class="sidebar">
+        <div class="dropdown-servicii">
+            <button class="button-servicii" onclick="showTipServicii()">Servicii</button>
+            <div id="s-dropdown" class="dropdown-content">
+                <a href="#Publicitate" onclick="showMenu('publicitate')">Publicitate</a>
+                <a href="#n2">Serviciu2</a>
+                <a href="#n3">Serviciu3</a>
+            </div>
+        </div>
+        <div class="dropdown-tip-servicii" id="publicitate">
+            <button class="button-tip-servicii" id="btt-tip-servicii" onclick="showPublicitate()">Publicitate</button>
+            <div id="tip-dropdown" class="tip-dropdown-content">
+                <a href="#n1">Sterge asta!</a>
+            </div>
+        </div>
+    </div>
+    <div class="container-servicii">
+        <div class="container-info"></div>
+    </div>
+</div>
+
+<script src="~/js/script-servicii.js"></script>
