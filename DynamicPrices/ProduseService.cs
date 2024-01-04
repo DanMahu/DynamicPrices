@@ -1,5 +1,6 @@
 ﻿using DynamicPrices.Models;
 using MySql.Data.MySqlClient;
+using System.Collections.Specialized;
 
 namespace DynamicPrices
 {
@@ -14,6 +15,7 @@ namespace DynamicPrices
             _databaseService = databaseService;
         }
 
+        //functie ce returneaza categoria de produse electronice si numarul de produse disponibile (lista de categorii pentru afisarea acestora in dropdown menu)
         public Dictionary<string, int> GetTipProduseElectronice()
         {
             Dictionary<string, int> tipuriProduse = new Dictionary<string, int>();
@@ -37,6 +39,7 @@ namespace DynamicPrices
             return tipuriProduse;
         }
 
+        //functie ce returneaza detaliile despre produse dupa categorie (pentru afisarea detaliilor intr-un tabel)
         public List<Dictionary<string, object>> GetProduseDupaTip(string tipProdus)
         {
             List<Dictionary<string, object>> produse = new List<Dictionary<string, object>>();
@@ -66,12 +69,13 @@ namespace DynamicPrices
             return produse;
         }
 
-        public List<string> GetProduseElectronice(string tipProdus)
+        //functie ce returneaza id-ul si numele produsului dupa categorie (lista produselor pentru afisarea istoriei de preturi)
+        public Dictionary<int, string> GetProduseElectronice(string tipProdus)
         {
-            List<string> produse = new List<string>();
+            Dictionary<int, string> produse = new Dictionary<int, string>();
             using (MySqlConnection connection = _databaseService.GetConnection())
             {
-                string sql = "select p.nume_produs from produse_electronice p where tip_produs = @tipProdus";
+                string sql = "select p.id_produs, p.nume_produs from produse_electronice p where tip_produs = @tipProdus";
                 using (MySqlCommand command = new MySqlCommand(sql, connection))
                 {
                     command.Parameters.AddWithValue("@tipProdus", tipProdus);
@@ -80,13 +84,49 @@ namespace DynamicPrices
                     {
                         while (reader.Read())
                         {
-                            string produs = reader.GetString("nume_produs");
-                            produse.Add(produs);
+                            int id_produs = reader.GetInt32("id_produs");
+                            string nume_produs = reader.GetString("nume_produs");
+                            produse.Add(id_produs, nume_produs);
                         }
                     }
                 }
             }
             return produse;
+        }
+
+        //functie ce returneaza istoria modificarii pretului pentru produsul selectat
+        public List<object> GetPriceHistoryByProduct(int product_id)
+        {
+            List<object> priceHistory = new List<object>();
+            using (MySqlConnection connection = _databaseService.GetConnection())
+            {
+                string sql = "select p.nume_produs, i.pret_vechi, i.pret_nou, i.data_modificare from istoric_preturi_electronice i join produse_electronice p on i.id_produs = p.id_produs where p.id_produs = @product_id";
+                using (MySqlCommand command = new MySqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@product_id", product_id);
+                    connection.Open();
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while(reader.Read())
+                        {
+                            decimal pret_vechi = reader.GetDecimal(reader.GetOrdinal("pret_vechi"));
+                            decimal pret_nou = reader.GetDecimal(reader.GetOrdinal("pret_nou"));
+                            DateTime data_mod = reader.GetDateTime(reader.GetOrdinal("data_modificare"));
+                            string data_modificare = data_mod.ToString("yyyy-MM-dd");
+
+                            var data = new
+                            {
+                                pret_vechi,
+                                pret_nou,
+                                data_modificare
+                            };
+
+                            priceHistory.Add(data);
+                        }
+                    }
+                }
+            }
+            return priceHistory;
         }
     }
 }

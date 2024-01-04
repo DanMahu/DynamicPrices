@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI.Relational;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace DynamicPrices.Controllers
 {
@@ -44,17 +46,25 @@ namespace DynamicPrices.Controllers
         {
             //lista de produse electronice dupa tip
             List<Dictionary<string, object>> produseDupaTip = _produseService.GetProduseDupaTip(tipProdus);
+
             return Json(produseDupaTip);
         }
 
         public IActionResult ListaDeProduse(string tipProdus)
         {
             //lista de produse electronice dupa tip
-            List<string> produse = _produseService.GetProduseElectronice(tipProdus);
-            //ViewBag.produse = produse;
+            Dictionary<int, string> produse = _produseService.GetProduseElectronice(tipProdus);
+            var arrayProduse = produse.Select(p => new { id_produs = p.Key, nume_produs = p.Value }).ToArray(); 
 
-            return Json(produse);
+            return Json(arrayProduse);
         }
 
+        public IActionResult IstoriePreturiDupaProdus(int product_id)
+        {
+            //istoria preturilor dupa produs
+            List<object> priceHistory = _produseService.GetPriceHistoryByProduct(product_id);
+
+            return Json(priceHistory);
+        }
     }
 }

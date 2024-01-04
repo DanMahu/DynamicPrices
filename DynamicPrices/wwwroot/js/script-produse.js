@@ -85,16 +85,19 @@ function showProductsByType(tipProdus) {
     fetch('ListaDeProduse?tipProdus=' + tipProdus)
         .then(Response => Response.json())
         .then(data => {
+            //alert(JSON.stringify(data));
             const div_a = document.querySelector('.istoric-dropdown-content');
             div_a.innerHTML = '';
             div_a.innerHTML = '<input type="text" class="search-bar" id="search-bar" placeholder="Caută produs..." oninput="searchProducts()">';
             if (data && data.length > 0) {
                 data.forEach(produs => {
                     const a = document.createElement('a');
-                    a.href = '#' + produs;
+                    a.href = '#' + produs.id_produs;
                     a.classList.add('product-item');
-                    a.onclick = "";
-                    a.innerHTML = produs;
+                    a.onclick = function () {
+                        showPriceHistory(produs.id_produs, produs.nume_produs)
+                    };
+                    a.innerHTML = produs.nume_produs;
                     div_a.appendChild(a);
                 });
             } else {
@@ -116,4 +119,50 @@ function searchProducts() {
             item.style.display = 'none';
         }
     });
+}
+
+function showPriceHistory(product_id, product_name) {
+    fetch('/DB/IstoriePreturiDupaProdus?product_id=' + product_id)
+        .then(Response => Response.json())
+        .then(data => {
+            const container = document.querySelector('.container-info');
+            container.innerHTML = '';
+
+            if (data && data.length > 0) {
+                const table = document.createElement('table');
+                table.className = 'tabel-istoric';
+
+                const thead = document.createElement('thead');
+                thead.innerHTML = `
+                    <tr>
+                        <th class="phy-h-name" colspan="3">${product_name}</th>
+                    </tr>
+                    <tr class="phy-h-main">
+                        <th class="phy-h-1">Preț Vechi</th>
+                        <th class="phy-h-2">Preț Nou</th>
+                        <th class="phy-h-3">Data Modificare</th>
+                    </tr>
+                `;
+                table.appendChild(thead);
+
+                data.forEach(produs => {
+                    const tr = document.createElement('tr');
+                    tr.classList.add('phy-row')
+                    tr.innerHTML = `
+                        <td>${produs['pret_vechi'].toFixed(2)}</td>
+                        <td>${produs['pret_nou'].toFixed(2)}</td>
+                        <td>${produs['data_modificare']}</td>
+                    `;
+                    table.appendChild(tr);
+                });
+
+                container.appendChild(table);
+            } else {
+                container.innerHTML = '<p>Acest produs nu a avut modificări de preț.</p>';
+            }
+        })
+
+        .catch(error => {
+            console.error('Eroare: ', error);
+        });
 }

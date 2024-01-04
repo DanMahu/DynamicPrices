@@ -170,18 +170,18 @@
     justify-content: flex-start;
 }
 
-.tabel-produse {
+.tabel-produse, .tabel-istoric {
     border-left: 2px solid gray;
     border-right: 2px solid gray;
 }
 
-.tabel-produse thead {
+.tabel-produse thead, .tabel-istoric thead {
     text-align: center;
     background-color: rgb(47, 47, 47);
     color: white;
 }
 
-.tabel-produse thead th {
+.tabel-produse thead th, .tabel-istoric thead th {
     border: 2px solid gray;
 }
 
@@ -222,4 +222,22 @@
 
 .tabel-produse tr .pret-curent-produs {
     font-weight: bold;
+}
+
+.tabel-istoric thead .phy-h-name {
+    font-size: 1.1vw;
+    padding: 0.2em 0 0.2em 0;
+}
+
+.tabel-istoric thead .phy-h-main th {
+    width: 33.33%;
+}
+
+.tabel-istoric .phy-row {
+    border-bottom: 2px solid gray;
+}
+
+.tabel-istoric td {
+    text-align: center;
+    font-size: 1.2vw;
 }
