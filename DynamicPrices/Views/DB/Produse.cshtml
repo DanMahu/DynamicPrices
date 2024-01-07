@@ -1,9 +1,9 @@
 ﻿<link rel="stylesheet" href="~/css/produse-style.css" />
-
+@model Dictionary<string, int>
 <div class="page-container">
     <div class="sidebar">
         <div class="dropdown-produse">
-            <button class="button-produse" onclick="showTipProduse()">Produse</button>
+            <button class="button-produse" onclick="showDetails('p-dropdown')">Produse</button>
             <div id="p-dropdown" class="dropdown-content">
                 <a href="#Electronice" onclick="showMenu('electronice')">Electronice</a>
                 <a href="#n2">Produs2</a>
@@ -11,12 +11,12 @@
             </div>
         </div>
         <div class="dropdown-tip-produse" id="electronice">
-            <button class="button-tip-produse" id="btt-tip-produse" onclick="showElectronice()">Electronice</button>
+            <button class="button-tip-produse" id="btt-tip-produse" onclick="showDetails('tip-dropdown')">Electronice</button>
             <div id="tip-dropdown" class="tip-dropdown-content">
                 @{
-                    if (ViewBag.tipuriProduseElectronice != null)
+                    if (Model != null)
                     {
-                        foreach (var pair in ViewBag.tipuriProduseElectronice)
+                        foreach (var pair in Model)
                         {
                             <a href="#@(pair.Key)" onclick="showProductsByType('@(pair.Key)')">@pair.Key (@pair.Value)</a>
                         }
@@ -28,10 +28,11 @@
                 }
             </div>
         </div>
-        <div class="dropdown-tip-produse" id="istoric-preturi">
-            <button class="button-istoric-pret" id="btt-istoric-pret" onclick="showProduse()">Istoric Prețuri</button>
-            <div id="istoric-dropdown" class="istoric-dropdown-content"></div>
+        <div class="dropdown-tip-produse" id="detalii-produse">
+            <button class="button-detalii" id="btt-detalii" onclick="showDetails('detalii-dropdown')">Detalii</button>
+            <div id="detalii-dropdown" class="detalii-dropdown-content"></div>
         </div>
+        <div class="multiple-options" id="multiple-options"></div>
     </div>
     <div class="container-produse">
         <div class="container-info"></div>

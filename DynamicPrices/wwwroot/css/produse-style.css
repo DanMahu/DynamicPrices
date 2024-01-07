@@ -5,6 +5,7 @@
     background-image: linear-gradient( 110.3deg, rgba(73,93,109,1) 4.3%, rgba(49,55,82,1) 96.7% );
     /*alt bg*/
     /*background-image: radial-gradient( circle 993px at 0.5% 50.5%,  rgba(137,171,245,0.37) 0%, rgba(245,247,252,1) 100.2% );*/
+    margin-bottom: 0px;
 }
 
 .page-container {
@@ -13,9 +14,10 @@
 }
 
 .sidebar {
+    position: absolute;
+    margin-left: 0.5%;
     width: 13%;
-    margin-left: 0.5em;
-    height: 35em;
+    height: 37.5em;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,7 +33,7 @@
     margin-top: 0.5em;
 }
 
-.button-produse, .button-tip-produse, .button-istoric-pret {
+.button-produse, .button-tip-produse, .button-detalii {
     background-color: rgb(47, 47, 47);
     color: white;
     font-size: 1.2vw;
@@ -40,20 +42,19 @@
     height: auto;
     border-radius: 3px;
     border: 1px solid rgb(182, 182, 182, 0.73);
-    text-indent: 0.5em;
+    text-indent: 0.4em;
     text-align: left;
 }
 
-#electronice, #istoric-preturi {
+#electronice, #detalii-produse {
     display: none;
 }
 
-.dropdown-content, .tip-dropdown-content, .istoric-dropdown-content {
+.dropdown-content, .tip-dropdown-content, .detalii-dropdown-content {
     background-color: ghostwhite;
     display: none;
     position: relative;
     width: 100%;
-    overflow: auto;
     border-radius: 3px;
     border-left: 1px solid rgb(27, 62, 96);
     border-right: 1px solid rgb(27, 62, 96);
@@ -65,16 +66,16 @@
     text-decoration: none;
     display: block;
     border-bottom: 1px solid rgb(27, 62, 96);
-    font-size: 1.1vw;
+    font-size: 0.9vw;
 }
 
-.istoric-dropdown-content a {
-    width: 15em;
+.detalii-dropdown-content a {
+    width: 14.9em;
     font-size: 0.8vw;
     color: black;
     text-decoration: none;
     display: block;
-    padding: 0.5em 1em;
+    padding: 0.3em 0.5em;
     border-bottom: 1px solid rgb(27, 62, 96);
 }
 
@@ -86,7 +87,7 @@
     display: block;
 }
 
-.button-produse::after, .button-tip-produse::after, .button-istoric-pret::after {
+.button-produse::after, .button-tip-produse::after, .button-detalii::after {
     content: '';
     display: inline-block;
     border: 0.4em solid transparent;
@@ -99,12 +100,12 @@
 
 .dropdown-produse.open .button-produse::after,
 .dropdown-tip-produse.open .button-tip-produse::after,
-.dropdown-tip-produse.open .button-istoric-pret::after {
+.dropdown-tip-produse.open .button-detalii::after {
     transform: rotate(180deg);
 }
 
 .search-bar {
-    width: 10.95em;
+    width: 10.85em;
     border: none;
     border-bottom: 1px solid rgb(27, 62, 96);
     outline: none;
@@ -121,10 +122,10 @@
     .button-tip-produse::after {
         margin-left: 1.5em;
     }
-    .button-istoric-pret::after {
-        margin-left: 0.4em;
+    .button-detalii::after {
+        margin-left: 3.6em;
     }
-    .button-produse, .button-tip-produse, .button-istoric-pret {
+    .button-produse, .button-detalii, .button-tip-produse {
         height: 2.5em;
     }
     .dropdown-tip-produse {
@@ -134,14 +135,17 @@
         width: 10.75em;
         height: 2em;
     }
+    .sidebar {
+        height: 14em;
+    }
 }
 
 @media (min-width: 768px) {
     .button-tip-produse::after {
         margin-left: 3em;
     }
-    .button-istoric-pret::after {
-        margin-left: 1.95em;
+    .button-detalii::after {
+        margin-left: 5.15em;
     }
     .dropdown-tip-produse {
         margin-top: 0.5em;
@@ -153,12 +157,15 @@
     border: 1px solid rgb(27, 62, 96);
     border-radius: 5px;
     background-image: radial-gradient( circle 1224px at 10.6% 8.8%, rgba(255,255,255,1) 0%, rgba(153,202,251,1) 100.2% );
-    width: 85.2%;
-    margin-left: 0.6%;
+    width: 85.8%;
+    /*margin-left: 0.6%;*/
+    margin-left: 13.8%;
+    height: 39em;
     font-size: 1vw;
     display: flex;
     flex-direction: column;
     align-items: center;
+    z-index: -2;
 }
 
 .container-info {
@@ -170,18 +177,18 @@
     justify-content: flex-start;
 }
 
-.tabel-produse, .tabel-istoric {
+.tabel-produse, .tabel-istoric, .tabel-stoc {
     border-left: 2px solid gray;
     border-right: 2px solid gray;
 }
 
-.tabel-produse thead, .tabel-istoric thead {
+.tabel-produse thead, .tabel-istoric thead, .tabel-stoc thead {
     text-align: center;
     background-color: rgb(47, 47, 47);
     color: white;
 }
 
-.tabel-produse thead th, .tabel-istoric thead th {
+.tabel-produse thead th, .tabel-istoric thead th, .tabel-stoc thead th {
     border: 2px solid gray;
 }
 
@@ -196,10 +203,6 @@
 .tabel-produse thead .p-h-3,
 .tabel-produse thead .p-h-4 {
     width: 9em;
-}
-
-.tabel-produse thead .p-h-5 {
-    
 }
 
 .tabel-produse thead .p-h-6 {
@@ -224,20 +227,70 @@
     font-weight: bold;
 }
 
-.tabel-istoric thead .phy-h-name {
+.tabel-istoric thead .phy-h-name, .tabel-stoc thead .stoc-h-name {
     font-size: 1.1vw;
     padding: 0.2em 0 0.2em 0;
 }
 
-.tabel-istoric thead .phy-h-main th {
+.tabel-istoric thead .phy-h-main th, .tabel-stoc thead .stoc-h-main th {
     width: 33.33%;
 }
 
-.tabel-istoric .phy-row {
+.tabel-istoric .phy-row, .tabel-stoc .stoc-row {
     border-bottom: 2px solid gray;
 }
 
-.tabel-istoric td {
+.tabel-istoric td, .tabel-stoc td {
     text-align: center;
     font-size: 1.2vw;
+}
+
+.else-message {
+    text-align: center;
+    font-size: 1.8vw;
+    font-weight: bold;
+    font-style: italic;
+    color: rgb(27, 62, 96);
+    margin: 8em auto;
+}
+
+.multiple-options {
+    position: absolute;
+    /* width: 11em;*/
+    width: 0;
+    overflow: hidden;
+    height: 43.4em;
+    top: -1px;
+    /*right: -10.85em;*/
+    left: 14.3em;
+    background-image: radial-gradient( circle 1224px at 10.6% 8.8%, rgba(255,255,255,1) 0%, rgba(153,202,251,1) 100.2% );
+    border-radius: 5px;
+    font-size: 0.9vw;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    transition: width 0.2s ease, opacity 0.6s ease;
+    opacity: 0;
+}
+
+#multiple-options.afisat {
+    width: 12.5em;
+    border: 1px solid rgb(27, 62, 96);
+    opacity: 1;
+}
+
+.multiple-options a {
+    text-decoration: none;
+    color: #333;
+    margin-top: 0.8em;
+    margin-right: 0.8em;   
+}
+
+.multiple-options .a-option {
+    transition: letter-spacing 0.4s ease;
+}
+
+.multiple-options .a-option:hover {
+    letter-spacing: 0.5px;
+    color: lightseagreen;
 }

@@ -1,5 +1,6 @@
 ﻿using DynamicPrices.Models;
 using MySql.Data.MySqlClient;
+using NuGet.Protocol.Plugins;
 using System.Collections.Specialized;
 
 namespace DynamicPrices
@@ -112,7 +113,7 @@ namespace DynamicPrices
                             decimal pret_vechi = reader.GetDecimal(reader.GetOrdinal("pret_vechi"));
                             decimal pret_nou = reader.GetDecimal(reader.GetOrdinal("pret_nou"));
                             DateTime data_mod = reader.GetDateTime(reader.GetOrdinal("data_modificare"));
-                            string data_modificare = data_mod.ToString("yyyy-MM-dd");
+                            string data_modificare = data_mod.ToString("dd-MM-yyyy");
 
                             var data = new
                             {
@@ -127,6 +128,77 @@ namespace DynamicPrices
                 }
             }
             return priceHistory;
+        }
+
+        //functie ce returneaza stocul actual al produsului selectat
+        public int GetStocActualDupaProdus(int idProdus)
+        {
+            int cantitate = 0;
+            using (MySqlConnection  conn = _databaseService.GetConnection())
+            {
+                string sql = "select cantitate from stocuri_electronice where id_produs = @idProdus";
+                using (MySqlCommand command = new MySqlCommand(sql, conn))
+                {
+                    command.Parameters.AddWithValue("idProdus", idProdus);
+                    conn.Open();
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            cantitate = reader.GetInt32("cantitate");
+                        }
+                    }
+                }
+            }
+            return cantitate;
+        }
+
+        //functie ce returneaza pretul actual al produsului selectat
+        public decimal GetPretCurentDupaProdus(int idProdus)
+        {
+            decimal pret = 0;
+            using (MySqlConnection connection = _databaseService.GetConnection())
+            {
+                string sql = "select pret_curent from preturi_electronice where id_produs = @idProdus";
+                using (MySqlCommand command = new MySqlCommand (sql, connection))
+                {
+                    command.Parameters.AddWithValue("idProdus", idProdus);
+                    connection.Open();
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            pret = reader.GetDecimal("pret_curent");
+                        }
+                    }
+                }
+            }
+            return pret;
+        }
+
+        //functie ce returneaza datele despre stocul produsului selectat (min, max, cantitate)
+        public List<int> MinMaxStoc(int idProdus)
+        {
+            List<int> listaStoc = new List<int>();
+            using (MySqlConnection conn = _databaseService.GetConnection())
+            {
+                string sql = "select cantitate, stoc_minim, stoc_maxim from stocuri_electronice where id_produs = @idProdus";
+                using (MySqlCommand command = new MySqlCommand(sql, conn))
+                {
+                    command.Parameters.AddWithValue("idProdus", idProdus);
+                    conn.Open();
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            listaStoc.Add(reader.GetInt32("cantitate"));
+                            listaStoc.Add(reader.GetInt32("stoc_minim"));
+                            listaStoc.Add(reader.GetInt32("stoc_maxim"));
+                        }
+                    }
+                }
+                return listaStoc;
+            }
         }
     }
 }

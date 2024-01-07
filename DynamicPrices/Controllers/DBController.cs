@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
-using MySqlX.XDevAPI.Relational;
-using Newtonsoft.Json;
-using System.Collections.Generic;
 
 namespace DynamicPrices.Controllers
 {
@@ -23,18 +20,12 @@ namespace DynamicPrices.Controllers
         {
             return View();
         }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-        public IActionResult Produse(string tipProdus)
+        public IActionResult Produse()
         {
             //lista de produse electronice (categoria)
             Dictionary<string, int> tipuriProduse = _produseService.GetTipProduseElectronice();
-            ViewBag.tipuriProduseElectronice = tipuriProduse;
 
-            return View();
+            return View(tipuriProduse);
         }
 
         public IActionResult Servicii()
@@ -65,6 +56,29 @@ namespace DynamicPrices.Controllers
             List<object> priceHistory = _produseService.GetPriceHistoryByProduct(product_id);
 
             return Json(priceHistory);
+        }
+
+        public IActionResult StocDupaProdus(int idProdus)
+        {
+            //stocul curent al unui produs
+            int stoc = _produseService.GetStocActualDupaProdus(idProdus);
+
+            return Ok(stoc);
+        }
+
+        public IActionResult PretDupaProdus(int idProdus)
+        {
+            //pretul curent al unui produs
+            decimal pret = _produseService.GetPretCurentDupaProdus(idProdus);
+
+            return Ok(pret);
+        }
+
+        public IActionResult MinMaxStoc(int idProdus)
+        {
+            List<int> listaStoc = _produseService.MinMaxStoc(idProdus);
+
+            return Json(listaStoc);
         }
     }
 }
