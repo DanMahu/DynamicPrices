@@ -1,6 +1,14 @@
 using DynamicPrices;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using DynamicPrices.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("DbContextConnection") ?? throw new InvalidOperationException("Connection string 'DbContextConnection' not found.");
+
+builder.Services.AddDbContext<DbContext>(options => options.UseSqlServer(connectionString));
+
+builder.Services.AddDefaultIdentity<DPUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<DbContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -27,5 +35,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapRazorPages();
 
 app.Run();

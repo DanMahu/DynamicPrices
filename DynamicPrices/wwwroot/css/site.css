@@ -18,8 +18,6 @@ html {
 }
 
 body {
-    /*margin-bottom: 60px;*/
-    /*font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;*/
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
@@ -69,4 +67,8 @@ body {
     .navbar-collapse.show .nav-link {
         border-color: transparent;
     }
+}
+
+#important-content {
+    margin: 2vw 0 0 10vw;
 }
