@@ -17,35 +17,9 @@ html {
   min-height: 100%;
 }
 
-body {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
-
-.header {
-    background-color: rgb(41, 41, 41);
-    border-bottom: 1px solid rgb(52, 52, 52);
-    height: 48px;
-    margin-bottom: 1.4%;
-}
-
-.main-container {
+/*.main-container {
     margin-bottom: 50px;
-}
-
-.p-footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    white-space: nowrap;
-    line-height: 3.2em;
-    background-color: rgb(41, 41, 41);
-    border-top: 1px solid rgb(52, 52, 52);
-    color: white;
-}
-
-.p-footer div {
-    margin-left: 8%;
-}
+}*/
 
 .navbar {
     background-color: rgb(41, 41, 41);
@@ -67,8 +41,4 @@ body {
     .navbar-collapse.show .nav-link {
         border-color: transparent;
     }
-}
-
-#important-content {
-    margin: 2vw 0 0 10vw;
 }

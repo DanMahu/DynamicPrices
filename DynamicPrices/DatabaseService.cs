@@ -13,7 +13,7 @@ namespace DynamicPrices
 
         public MySqlConnection GetConnection()
         {
-            string connectionString = _configuration.GetConnectionString("DbContextConnection")!;
+            string connectionString = _configuration.GetConnectionString("MySQLConnection")!;
             return new MySqlConnection(connectionString);
         }
     }

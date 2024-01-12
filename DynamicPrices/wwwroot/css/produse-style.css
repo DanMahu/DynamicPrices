@@ -8,6 +8,10 @@
     margin-bottom: 0px;
 }
 
+.main-container {
+    max-width: 100%;
+}
+
 .page-container {
     display: flex;
     flex-direction: row;
@@ -190,6 +194,7 @@
 
 .tabel-produse thead th, .tabel-istoric thead th, .tabel-stoc thead th {
     border: 2px solid gray;
+    font-size: 1vw;
 }
 
 .tabel-produse thead .p-h-1 {

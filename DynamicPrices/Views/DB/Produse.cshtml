@@ -3,7 +3,7 @@
 <div class="page-container">
     <div class="sidebar">
         <div class="dropdown-produse">
-            <button class="button-produse" onclick="showDetails('p-dropdown')">Produse</button>
+            <button class="button-produse bg-primary" onclick="showDetails('p-dropdown')">Produse</button>
             <div id="p-dropdown" class="dropdown-content">
                 <a href="#Electronice" onclick="showMenu('electronice')">Electronice</a>
                 <a href="#n2">Produs2</a>
@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="dropdown-tip-produse" id="electronice">
-            <button class="button-tip-produse" id="btt-tip-produse" onclick="showDetails('tip-dropdown')">Electronice</button>
+            <button class="button-tip-produse bg-primary" id="btt-tip-produse" onclick="showDetails('tip-dropdown')">Electronice</button>
             <div id="tip-dropdown" class="tip-dropdown-content">
                 @{
                     if (Model != null)
@@ -29,7 +29,7 @@
             </div>
         </div>
         <div class="dropdown-tip-produse" id="detalii-produse">
-            <button class="button-detalii" id="btt-detalii" onclick="showDetails('detalii-dropdown')">Detalii</button>
+            <button class="button-detalii bg-primary" id="btt-detalii" onclick="showDetails('detalii-dropdown')">Detalii</button>
             <div id="detalii-dropdown" class="detalii-dropdown-content"></div>
         </div>
         <div class="multiple-options" id="multiple-options"></div>

@@ -1,7 +1,5 @@
 ﻿using DynamicPrices.Models;
 using MySql.Data.MySqlClient;
-using NuGet.Protocol.Plugins;
-using System.Collections.Specialized;
 
 namespace DynamicPrices
 {
