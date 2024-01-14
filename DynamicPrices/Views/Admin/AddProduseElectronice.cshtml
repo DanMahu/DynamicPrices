@@ -1,0 +1,94 @@
+﻿@{
+    ViewBag.MenuAdmin = true;
+}
+@model AddProdusElectronicModel
+
+<link rel="stylesheet" href="~/css/admin-style.css" />
+<script src="~/js/script-admin.js"></script>
+
+@{
+    /*
+    <script>
+    fetch('/Admin/TipProduse')
+        .then(Response => Response.json())
+            .then(data => {
+            //alert(JSON.stringify(data));
+            const select = document.getElementById('select-type');
+            if (data && data.length > 0) {
+                select.innerHTML = '<option selected disabled>Selectează</option>';
+                data.forEach(element => {
+                    const option = document.createElement('option');
+                    option.value = element.TipProdus;
+                    option.innerHTML = element.TipProdus;
+                    select.appendChild(option);
+                });
+                const altTip = document.createElement('option');
+                altTip.value = 'new-type';
+                altTip.innerHTML = 'Tip nou';
+                select.appendChild(altTip);
+                } else {
+                document.getElementById('select-type').classList.add('d-none');
+                document.getElementById('input-new-type').classList.remove('d-none');
+                //const altTip = document.createElement('option');
+                altTip.value = 'new-type';
+                altTip.innerHTML = 'Tip nou';
+                select.appendChild(altTip);//
+}
+        })
+        .catch(error => {
+            console.error('Eroare: ', error);
+        });
+</script>
+     */
+}
+
+<div class="page-container">
+    <div class="page-content pb-4 overflow-y-auto">
+        <div class="row px-0 m-0 pt-1">
+            <h3 class="text-primary my-3 ps-5">Adaugă produs electronic</h3> <hr />
+        </div>
+        <form method="post">
+            <div class="form-content p-0">
+                <div class="row">
+                    <div class="col-md-6 mb-2 mt-2">
+                        <label asp-for="NumeProdus" class="p-0"></label>
+                        <input asp-for="NumeProdus" type="text" autocomplete="off" class="form-control py-2" />
+                        <span asp-validation-for="NumeProdus" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-2 mt-2">
+                        <label asp-for="TipProdus" class="p-0"></label>
+                        <input asp-for="TipProdus" type="text" autocomplete="off" class="form-control py-2" />
+                        <span asp-validation-for="TipProdus" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-2 mt-2">
+                        <label asp-for="CostProducere" class="p-0"></label>
+                        <input asp-for="CostProducere" type="text" autocomplete="off" class="form-control py-2" />
+                        <span asp-validation-for="CostProducere" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-2 mt-2">
+                        <label asp-for="PretRecomandat" class="p-0"></label>
+                        <input asp-for="PretRecomandat" type="text" autocomplete="off" class="form-control py-2" />
+                        <span asp-validation-for="PretRecomandat" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-2 mt-2">
+                        <label asp-for="PretCurent" class="p-0"></label>
+                        <input asp-for="PretCurent" type="text" autocomplete="off" class="form-control py-2" />
+                        <span asp-validation-for="PretCurent" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-3 mt-2">
+                        <label asp-for="Descriere" class="p-0"></label>
+                        <input asp-for="Descriere" type="text" autocomplete="off" class="form-control py-2" />
+                        <span asp-validation-for="Descriere" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row ms-0 pt-3" style="margin-right: 0.08rem">
+                    <button type="submit" class="btn btn-primary form-control">Adaugă</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

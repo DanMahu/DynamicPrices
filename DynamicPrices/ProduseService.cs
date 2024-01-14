@@ -20,7 +20,7 @@ namespace DynamicPrices
             Dictionary<string, int> tipuriProduse = new Dictionary<string, int>();
             using (MySqlConnection connection = _databaseService.GetConnection())
             {
-                string sql = "select tip_produs, count(*) as numar_produse from produse_electronice group by tip_produs";
+                string sql = "select TipProdus, count(*) as numar_produse from produse_electronice group by TipProdus";
                 using (MySqlCommand command = new MySqlCommand(sql, connection))
                 {
                     connection.Open();
@@ -28,7 +28,7 @@ namespace DynamicPrices
                     {
                         while (reader.Read())
                         {
-                            string tipProdus = reader.GetString("tip_produs");
+                            string tipProdus = reader.GetString("TipProdus");
                             int numarProdus = reader.GetInt32("numar_produse");
                             tipuriProduse.Add(tipProdus, numarProdus);
                         }
@@ -45,7 +45,7 @@ namespace DynamicPrices
             using (MySqlConnection connection = _databaseService.GetConnection())
             {
                 //string sql = "select * from produse_electronice where tip_produs = @tipProdus";
-                string sql = "select p.nume_produs, p.tip_produs, p.cost_producere, p.pret_recomandat, p.descriere, pe.pret_curent from produse_electronice p join preturi_electronice pe on p.id_produs = pe.id_produs where p.tip_produs = @tipProdus";
+                string sql = "select p.NumeProdus, p.TipProdus, p.CostProducere, p.PretRecomandat, p.Descriere, pe.PretCurent from produse_electronice p join preturi_electronice pe on p.IdProdus = pe.IdProdus where p.TipProdus = @tipProdus";
                 using (MySqlCommand command = new MySqlCommand(sql, connection))
                 {
                     command.Parameters.AddWithValue("@tipProdus", tipProdus);
@@ -74,7 +74,7 @@ namespace DynamicPrices
             Dictionary<int, string> produse = new Dictionary<int, string>();
             using (MySqlConnection connection = _databaseService.GetConnection())
             {
-                string sql = "select p.id_produs, p.nume_produs from produse_electronice p where tip_produs = @tipProdus";
+                string sql = "select p.IdProdus, p.NumeProdus from produse_electronice p where TipProdus = @tipProdus";
                 using (MySqlCommand command = new MySqlCommand(sql, connection))
                 {
                     command.Parameters.AddWithValue("@tipProdus", tipProdus);
@@ -83,8 +83,8 @@ namespace DynamicPrices
                     {
                         while (reader.Read())
                         {
-                            int id_produs = reader.GetInt32("id_produs");
-                            string nume_produs = reader.GetString("nume_produs");
+                            int id_produs = reader.GetInt32("IdProdus");
+                            string nume_produs = reader.GetString("NumeProdus");
                             produse.Add(id_produs, nume_produs);
                         }
                     }
@@ -99,7 +99,7 @@ namespace DynamicPrices
             List<object> priceHistory = new List<object>();
             using (MySqlConnection connection = _databaseService.GetConnection())
             {
-                string sql = "select p.nume_produs, i.pret_vechi, i.pret_nou, i.data_modificare from istoric_preturi_electronice i join produse_electronice p on i.id_produs = p.id_produs where p.id_produs = @product_id";
+                string sql = "select p.NumeProdus, i.pret_vechi, i.pret_nou, i.data_modificare from istoric_preturi_electronice i join produse_electronice p on i.id_produs = p.IdProdus where p.IdProdus = @product_id";
                 using (MySqlCommand command = new MySqlCommand(sql, connection))
                 {
                     command.Parameters.AddWithValue("@product_id", product_id);
@@ -157,7 +157,7 @@ namespace DynamicPrices
             decimal pret = 0;
             using (MySqlConnection connection = _databaseService.GetConnection())
             {
-                string sql = "select pret_curent from preturi_electronice where id_produs = @idProdus";
+                string sql = "select PretCurent from preturi_electronice where IdProdus = @idProdus";
                 using (MySqlCommand command = new MySqlCommand (sql, connection))
                 {
                     command.Parameters.AddWithValue("idProdus", idProdus);
@@ -166,7 +166,7 @@ namespace DynamicPrices
                     {
                         while (reader.Read())
                         {
-                            pret = reader.GetDecimal("pret_curent");
+                            pret = reader.GetDecimal("PretCurent");
                         }
                     }
                 }

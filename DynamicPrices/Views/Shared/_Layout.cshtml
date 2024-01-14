@@ -11,7 +11,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary box-shadow mb-2">
             <!--bg-white_border-bottom-->
             <div class="container-fluid">
                 <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">Dynamic Pricing</a>
@@ -41,13 +41,85 @@
     </header>
     <div class="container main-container">
         <main role="main" class="pb-3">
+            @if (ViewBag.MenuAdmin ?? false)
+            {
+                <link rel="stylesheet" href="~/css/menuAdmin.css" />
+                <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+                
+                <div class="sidebar-btn bg-primary">
+                    <span class="fas fa-bars"></span>
+                </div>
+                <nav class="sidebar bg-primary">
+                    <div class="text">
+                        Menu
+                    </div>
+                    <ul>
+                        <li class="active"><a asp-controller="Admin" asp-action="Admin"><i class="bi bi-x-diamond"></i> Dashboard</a></li>
+                        <li>
+                            <a href="#" class="feat-btn">
+                                <i class="bi bi-database"></i> Produse
+                                <span class="fas fa-caret-down first"></span>
+                            </a>
+                            <ul class="feat-show">
+                                <li><a href="#" onclick="manage('electronice')">Electronice</a></li>
+                                <li><a href="#">Tip2</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" class="serv-btn">
+                                <i class="bi bi-database"></i> Servicii
+                                <span class="fas fa-caret-down second"></span>
+                            </a>
+                            <ul class="serv-show">
+                                <li><a href="#">Publicitate</a></li>
+                                <li><a href="#">Tip2</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" class="det-btn">
+                                <i class="bi bi-file-text"></i> Detalii
+                                <span class="fas fa-caret-down third"></span>
+                            </a>
+                            <ul class="det-show">
+                                <li><a href="#">Clienți</a></li>
+                                <li><a href="#">Vânzări Produse</a></li>
+                                <li><a href="#">Vânzări Servicii</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Shortcuts</a></li>
+                        <li><a href="#">Feedback</a></li>
+                    </ul>
+                </nav>
+                <script>
+                    $('.sidebar-btn').click(function () {
+                        $(this).toggleClass("click");
+                        $('.sidebar').toggleClass("show");
+                    });
+                    $('.feat-btn').click(function () {
+                        $('.sidebar ul .feat-show').toggleClass("show");
+                        $('.sidebar ul .first').toggleClass("rotate");
+                    });
+                    $('.serv-btn').click(function () {
+                        $('.sidebar ul .serv-show').toggleClass("show1");
+                        $('.sidebar ul .second').toggleClass("rotate");
+                    });
+                    $('.det-btn').click(function () {
+                        $('.sidebar ul .det-show').toggleClass("show2");
+                        $('.sidebar ul .third').toggleClass("rotate");
+                    });
+                    $('.sidebar ul li').click(function () {
+                        $(this).addClass("active").siblings().removeClass("active");
+                    });
+                </script>
+            }
             @RenderBody()
         </main>
     </div>
 
     <footer class="footer bg-primary text-white">
         <div class="container">
-            <i class="bi bi-x-diamond"></i> 2024 - Dynamic Pricing
+            <i class="bi bi-bar-chart"></i> 2024 - Dynamic Pricing
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

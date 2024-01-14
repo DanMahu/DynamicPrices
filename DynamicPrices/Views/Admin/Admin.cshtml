@@ -1,60 +1,24 @@
-﻿<link rel="stylesheet" href="~/css/admin-style.css" />
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-@{
-    ViewData["Title"] = "Admin Page";
+﻿@{
+    ViewBag.MenuAdmin = true;
 }
+<link rel="stylesheet" href="~/css/admin-style.css" />
+<script src="~/js/script-admin.js"></script>
 
-<div class="sidebar-btn bg-primary">
-    <span class="fas fa-bars"></span>
+<div class="page-container">
+    <div class="page-content pb-4">
+        <div class="options p-1 px-0 d-flex justify-content-between m-0 d-none">
+            <div class="d-flex btn-sm">
+                <a asp-controller="Admin" asp-action="AddProduseElectronice" id="add-electronice" class="btn btn-primary ms-3 btn-sm d-none"><i class="bi bi-plus-circle pe-1"></i> Adaugă Produs</a>
+                <button type="button" id="mod-electronice" class="btn btn-primary ms-2 btn-sm"><i class="bi bi-pencil pe-1 d-none"></i> Modifică / Șterge</button>
+            </div>
+            <div class="input-group-sm me-4">
+                <input type="search" id="search-product" class="form-control dropdown-toggle border border-secondary" style="width: 15em" placeholder="Caută produs..." data-bs-toggle="dropdown">
+                <div class="dropdown-menu fs-5 overflow-y-auto">
+                    <a class="dropdown-item" href="#">1</a>
+                    <a class="dropdown-item" href="#">2</a>
+                    <a class="dropdown-item" href="#">3</a>
+                </div>
+            </div>
+        </div>
+	</div>
 </div>
-<nav class="sidebar bg-primary">
-    <div class="text">
-        Manage
-    </div>
-    <ul>
-        <li class="active"><a href="#"><i class="bi bi-x-diamond"></i> Dashboard</a></li>
-        <li>
-            <a href="#" class="feat-btn">
-                <i class="bi bi-database-add"></i> Adaugă Produse
-                <span class="fas fa-caret-down first"></span>
-            </a>
-            <ul class="feat-show">
-                <li><a href="#">Electronice</a></li>
-                <li><a href="#">Tip2</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="#" class="serv-btn">
-                <i class="bi bi-database-add"></i> Adaugă Servicii
-                <span class="fas fa-caret-down second"></span>
-            </a>
-            <ul class="serv-show">
-                <li><a href="#">Publicitate</a></li>
-                <li><a href="#">Tip2</a></li>
-            </ul>
-        </li>
-        <li><a href="#">Overview</a></li>
-        <li><a href="#">Shortcuts</a></li>
-        <li><a href="#">Feedback</a></li>
-    </ul>
-</nav>
-
-
-<script>
-    $('.sidebar-btn').click(function () {
-        $(this).toggleClass("click");
-        $('.sidebar').toggleClass("show");
-    });
-    $('.feat-btn').click(function () {
-        $('.sidebar ul .feat-show').toggleClass("show");
-        $('.sidebar ul .first').toggleClass("rotate");
-    });
-    $('.serv-btn').click(function () {
-        $('.sidebar ul .serv-show').toggleClass("show1");
-        $('.sidebar ul .second').toggleClass("rotate");
-    });
-    $('.sidebar ul li').click(function () {
-        $(this).addClass("active").siblings().removeClass("active");
-    });
-</script>
