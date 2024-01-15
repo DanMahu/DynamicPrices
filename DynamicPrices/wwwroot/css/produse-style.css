@@ -181,75 +181,6 @@
     justify-content: flex-start;
 }
 
-.tabel-produse, .tabel-istoric, .tabel-stoc {
-    border-left: 2px solid gray;
-    border-right: 2px solid gray;
-}
-
-.tabel-produse thead, .tabel-istoric thead, .tabel-stoc thead {
-    text-align: center;
-    background-color: rgb(47, 47, 47);
-    color: white;
-}
-
-.tabel-produse thead th, .tabel-istoric thead th, .tabel-stoc thead th {
-    border: 2px solid gray;
-    font-size: 1vw;
-}
-
-.tabel-produse thead .p-h-1 {
-    width: 2.5em;
-}
-
-.tabel-produse thead .p-h-2 {
-    width: 20em;
-}
-
-.tabel-produse thead .p-h-3,
-.tabel-produse thead .p-h-4 {
-    width: 9em;
-}
-
-.tabel-produse thead .p-h-6 {
-    width: 8em;
-}
-
-.tabel-produse td {
-    text-align: center;
-}
-
-.tabel-produse .p-row {
-    border-bottom: 2px solid gray;
-    height: 3.5em;
-}
-
-.tabel-produse tr .descriere-produs {
-    text-align: justify;
-    padding: 0 0.6em 0 0.6em;
-}
-
-.tabel-produse tr .pret-curent-produs {
-    font-weight: bold;
-}
-
-.tabel-istoric thead .phy-h-name, .tabel-stoc thead .stoc-h-name {
-    font-size: 1.1vw;
-    padding: 0.2em 0 0.2em 0;
-}
-
-.tabel-istoric thead .phy-h-main th, .tabel-stoc thead .stoc-h-main th {
-    width: 33.33%;
-}
-
-.tabel-istoric .phy-row, .tabel-stoc .stoc-row {
-    border-bottom: 2px solid gray;
-}
-
-.tabel-istoric td, .tabel-stoc td {
-    text-align: center;
-    font-size: 1.2vw;
-}
-
 .else-message {
     text-align: center;
     font-size: 1.8vw;
@@ -298,4 +229,41 @@
 .multiple-options .a-option:hover {
     letter-spacing: 0.5px;
     color: lightseagreen;
+}
+
+table tbody td {
+    text-align: center;
+    font-size: 0.85vw;
+    font-weight: 500;
+}
+
+table tbody td:first-child, td:last-child {
+    font-weight: 600;
+}
+
+table tbody td:nth-child(5) {
+    text-align: justify;
+}
+
+.custom-header th {
+    font-size: 0.9vw;
+    text-align: center;
+}
+
+.custom-header th:nth-child(5) {
+    width: 40%;
+}
+
+.custom-header2 tr:first-child th, .custom-header3 tr:first-child th {
+    font-size: 1.1vw;
+}
+
+.custom-header2 th, .custom-header3 th {
+    font-size: 0.9vw;
+    text-align: center;
+    width: 33.33%;
+}
+
+.tabel-istoric tbody td, .tabel-stoc tbody td {
+    font-size: 1.05vw;
 }

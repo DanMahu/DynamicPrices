@@ -29,6 +29,14 @@ namespace DynamicPrices.Controllers
             return Json(typeArray);
         }
 
+        public IActionResult AllProduseElectronice()
+        {
+            //lista de produse electronice
+            List<Dictionary<string, object>> produse = _produseService.GetAllProduseElectronice();
+
+            return Json(produse);
+        }
+
         public ActionResult AddProduseElectronice() {
 
             return View();

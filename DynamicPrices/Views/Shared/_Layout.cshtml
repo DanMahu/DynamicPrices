@@ -117,11 +117,14 @@
         </main>
     </div>
 
-    <footer class="footer bg-primary text-white">
-        <div class="container">
-            <i class="bi bi-bar-chart"></i> 2024 - Dynamic Pricing
-        </div>
-    </footer>
+    @if (ViewBag.ShowFooter == null || ViewBag.ShowFooter)
+    {
+        <footer class="footer bg-primary text-white">
+            <div class="container">
+                <i class="bi bi-bar-chart"></i> 2024 - Dynamic Pricing
+            </div>
+        </footer>
+    }
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

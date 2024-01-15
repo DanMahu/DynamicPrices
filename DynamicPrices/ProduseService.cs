@@ -1,5 +1,6 @@
 ﻿using DynamicPrices.Models;
 using MySql.Data.MySqlClient;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace DynamicPrices
 {
@@ -68,6 +69,33 @@ namespace DynamicPrices
             return produse;
         }
 
+        public List<Dictionary<string, object>> GetAllProduseElectronice()
+        {
+            List<Dictionary<string, object>> produse = new List<Dictionary<string, object>>();
+            using (MySqlConnection connection = _databaseService.GetConnection())
+            {
+                string sql = "select p.IdProdus, p.NumeProdus, p.TipProdus, p.CostProducere, p.PretRecomandat, pe.PretCurent, p.Descriere from produse_electronice p join preturi_electronice pe on p.IdProdus = pe.IdProdus";
+                connection.Open();
+                using (MySqlCommand command = new MySqlCommand(sql, connection))
+                {
+                    //connection.Open();
+                    using (MySqlDataReader rdr = command.ExecuteReader())
+                    {
+                        while (rdr.Read())
+                        {
+                            Dictionary<string, object> produs = new Dictionary<string, object>();
+                            for (int i = 0; i < rdr.FieldCount; i++)
+                            {
+                                produs[rdr.GetName(i)] = rdr.GetValue(i);
+                            }
+                            produse.Add(produs);
+                        }
+                    }
+                }
+            }
+            return produse;
+        }
+
         //functie ce returneaza id-ul si numele produsului dupa categorie (lista produselor pentru afisarea istoriei de preturi)
         public Dictionary<int, string> GetProduseElectronice(string tipProdus)
         {
@@ -132,7 +160,7 @@ namespace DynamicPrices
         public int GetStocActualDupaProdus(int idProdus)
         {
             int cantitate = 0;
-            using (MySqlConnection  conn = _databaseService.GetConnection())
+            using (MySqlConnection conn = _databaseService.GetConnection())
             {
                 string sql = "select cantitate from stocuri_electronice where id_produs = @idProdus";
                 using (MySqlCommand command = new MySqlCommand(sql, conn))

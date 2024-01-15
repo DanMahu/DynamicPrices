@@ -11,5 +11,6 @@ namespace DynamicPrices
         int GetStocActualDupaProdus(int idProdus);
         decimal GetPretCurentDupaProdus(int idProdus);
         List<int> MinMaxStoc(int idProdus);
+        List<Dictionary<string, object>> GetAllProduseElectronice();
     }
 }

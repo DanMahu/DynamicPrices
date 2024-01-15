@@ -17,16 +17,16 @@ namespace DynamicPrices.Models
         public string TipProdus { get; set; }
 
         [DisplayName("Cost Producere")]
-        [Range(0.00, 99999999.99)]
+        [Range(0.00, 99999999.99, ErrorMessage = "Cost invalid!")]
         public decimal CostProducere { get; set; }
         
         [DisplayName("Preț Recomandat")]
-        [Range(0.00, 99999999.99)]
+        [Range(0.00, 99999999.99, ErrorMessage = "Preț invalid!")]
         public decimal PretRecomandat { get; set; }
         
         [Required(ErrorMessage = "Prețul produsului este obligatoriu!")]
         [DisplayName("Preț Curent")]
-        [Range(0.00, 99999999.99)]
+        [Range(0.00, 99999999.99, ErrorMessage = "Preț invalid!")]
         public decimal PretCurent { get; set; }
 
         [Required(ErrorMessage = "Descrierea produsului este obligatorie!")]

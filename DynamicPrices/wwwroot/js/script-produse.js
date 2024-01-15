@@ -28,46 +28,45 @@ function showProductsByType(tipProdus) {
 
             if (data && data.length > 0) {
                 const table = document.createElement('table');
-                table.className = 'tabel-produse';
-
+                table.className = 'table table-dark table-sm table-striped';
                 const thead = document.createElement('thead');
+                thead.className = 'custom-header';
                 thead.innerHTML = `
                     <tr>
-                        <th class="p-h-1">Nr.</th>
-                        <th class="p-h-2">Nume Produs</th>
-                        <th class="p-h-3">Cost Producere</th>
-                        <th class="p-h-4">Preț Recomandat</th>
-                        <th class="p-h-5">Descriere</th>
-                        <th class="p-h-6">Preț Curent</th>
+                        <th scope="col">Nr.</th>
+                        <th scope="col">Nume Produs</th>
+                        <th scope="col">Cost Producere</th>
+                        <th scope="col">Preț Recomandat</th>
+                        <th scope="col">Descriere</th>
+                        <th scope="col">Preț Curent</th>
                     </tr>
                 `;
                 table.appendChild(thead);
-
+                const tbody = document.createElement('tbody');
                 let nr = 1;
                 data.forEach(produs => {
                     const tr = document.createElement('tr');
-                    tr.classList.add('p-row')
+                    tr.classList.add('table-secondary')
                     tr.innerHTML = `
                         <td>${nr}</td>
-                        <td>${produs['nume_produs']}</td>
-                        <td>${produs['cost_producere'].toFixed(2)}</td>
-                        <td>${produs['pret_recomandat'].toFixed(2)}</td>
-                        <td class="descriere-produs">${produs['descriere']}</td>
-                        <td class="pret-curent-produs">${produs['pret_curent'].toFixed(2)}</td>
+                        <td>${produs['NumeProdus']}</td>
+                        <td>${produs['CostProducere'].toFixed(2)}</td>
+                        <td>${produs['PretRecomandat'].toFixed(2)}</td>
+                        <td>${produs['Descriere']}</td>
+                        <td>${produs['PretCurent'].toFixed(2)}</td>
                     `;
-                    table.appendChild(tr);
                     nr++;
+                    tbody.appendChild(tr);
                 });
-
+                table.appendChild(tbody);
                 container.appendChild(table);
             } else {
                 container.innerHTML = '<p>Niciun produs disponibil.</p>';
             }
         })
-
-    .catch(error => {
-        console.error('Eroare: ', error);
-    });
+        .catch(error => {
+            console.error('Eroare: ', error);
+        });
 
     //afisare meniu de istoric preturi
     showMenu('detalii-produse');
@@ -122,32 +121,33 @@ function showPriceHistory(product_id, product_name) {
 
             if (data && data.length > 0) {
                 const table = document.createElement('table');
-                table.className = 'tabel-istoric';
+                table.className = 'tabel-istoric table table-dark table-sm table-striped';
 
                 const thead = document.createElement('thead');
+                thead.className = 'custom-header2';
                 thead.innerHTML = `
                     <tr>
-                        <th class="phy-h-name" colspan="3">${product_name}</th>
+                        <th colspan="3">${product_name}</th>
                     </tr>
-                    <tr class="phy-h-main">
-                        <th class="phy-h-1">Preț Vechi</th>
-                        <th class="phy-h-2">Preț Nou</th>
-                        <th class="phy-h-3">Dată Modificare</th>
+                    <tr>
+                        <th>Preț Vechi</th>
+                        <th>Preț Nou</th>
+                        <th>Dată Modificare</th>
                     </tr>
                 `;
                 table.appendChild(thead);
-
+                const tbody = document.createElement('tbody');
                 data.forEach(produs => {
                     const tr = document.createElement('tr');
-                    tr.classList.add('phy-row')
+                    tr.classList.add('table-secondary');
                     tr.innerHTML = `
                         <td>${produs['pret_vechi'].toFixed(2)}</td>
                         <td>${produs['pret_nou'].toFixed(2)}</td>
                         <td>${produs['data_modificare']}</td>
                     `;
-                    table.appendChild(tr);
+                    tbody.appendChild(tr);
                 });
-
+                table.appendChild(tbody);
                 container.appendChild(table);
             } else {
                 container.innerHTML = '<p class="else-message">Acest produs nu a avut modificări de preț.</p>';
@@ -167,29 +167,31 @@ function showMinMaxStoc(idProdus, numeProdus) {
 
             if (data && data.length > 0) {
                 const table = document.createElement('table');
-                table.className = 'tabel-stoc';
+                table.className = 'tabel-stoc table table-dark table-sm table-striped';
 
                 const thead = document.createElement('thead');
+                thead.className = 'custom-header3';
                 thead.innerHTML = `
                     <tr>
-                        <th class="stoc-h-name" colspan="3">${numeProdus}</th>
+                        <th colspan="3">${numeProdus}</th>
                     </tr>
-                    <tr class="stoc-h-main">
-                        <th class="stoc-h-1">Cantitate</th>
-                        <th class="stoc-h-2">Stoc Minim</th>
-                        <th class="stoc-h-3">Stoc Maxim</th>
+                    <tr>
+                        <th>Cantitate</th>
+                        <th>Stoc Minim</th>
+                        <th>Stoc Maxim</th>
                     </tr>
                 `;
                 table.appendChild(thead);
-
+                const tbody = document.createElement('tbody');
                 const tr = document.createElement('tr');
-                tr.classList.add('stoc-row')
+                tr.classList.add('table-secondary');
                 tr.innerHTML = `
                     <td>${data[0]}</td>
                     <td>${data[1]}</td>
                     <td>${data[2]}</td>
                 `;
-                table.appendChild(tr);
+                tbody.appendChild(tr);
+                table.appendChild(tbody);
                 container.appendChild(table);
             } else { container.innerHTML = '<p class="else-message">Acest produs nu a are stoc.</p>'; }
         })
