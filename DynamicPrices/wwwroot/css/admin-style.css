@@ -36,13 +36,7 @@ body {
 
 .options a {
     color: darkgray;
-    font-size: 0.85vw;
-}
-
-@media (max-width: 768px) {
-    .options a {
-        font-size: 6px;
-    }
+    font-size: 0.8vw;
 }
 
 .options .dropdown-menu {
@@ -98,4 +92,72 @@ table tbody td:last-child {
 
 .custom-header th:last-child {
     width: 35%;
+}
+
+.tabel-mod tbody td {
+    font-size: 0.75vw;
+}
+
+.tabel-mod tbody td:nth-child(7) {
+    text-align: justify;
+}
+
+.custom-header4 th {
+    font-size: 0.6vw;
+    text-align: center;
+}
+
+.custom-header4 th:first-child {
+    width: 2%;
+}
+
+.custom-header4 th:nth-child(2) {
+    width: 10%;
+}
+
+.custom-header4 th:nth-child(3) {
+    width: 7%;
+}
+
+.custom-header4 th:nth-child(4) {
+    width: 9%;
+}
+
+.custom-header4 th:nth-child(5) {
+    width: 10%;
+}
+
+.custom-header4 th:nth-child(6) {
+    width: 5%;
+}
+
+.custom-header4 th:nth-child(7) {
+    width: 20%;
+}
+
+.custom-header4 th:last-child {
+    width: 14%;
+}
+
+table .btn-group {
+    max-height: 6vh;
+}
+
+table .btn-group .edit, table .btn-group .delete {
+    font-size: 0.6vw;
+}
+
+@media (max-width: 768px) {
+    .options a {
+        font-size: 6px;
+    }
+
+    .tabel-mod tbody td {
+        font-weight: 800;
+        font-size: 0.25rem;
+    }
+
+    .page-content {
+        overflow: auto;
+    }
 }

@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.MenuAdmin = true;
+    ViewBag.ShowFooter = false;
+}
+<link rel="stylesheet" href="~/css/admin-style.css" />
+<script src="~/js/script-admin.js"></script>
+@model List<ProduseElectroniceCuPretModel>
+
+<div class="page-container">
+    <div class="page-content pb-4">
+        <div class="options p-1 px-0 d-flex justify-content-between m-0 align-items-center">
+            <div class="d-flex btn-sm">
+                <a asp-controller="Admin" asp-action="AddProduseElectronice" class="btn btn-primary ms-3 btn-sm"><i class="bi bi-plus-circle pe-1"></i> Adaugă Produs</a>
+                <a asp-controller="Admin" asp-action="ModProduseElectronice" class="btn btn-primary ms-2 btn-sm"><i class="bi bi-pencil pe-1"></i> Modifică / Șterge</a>
+            </div>
+            <div class="input-group-sm me-4">
+                <input type="search" id="search-product" class="form-control border border-secondary" style="width: 16em; font-size: 1.3vw" placeholder="Caută produs..." oninput="searchProduct()">
+            </div>
+        </div>
+        <div class="table-info px-4 pt-3">
+            <table class="table table-dark table-sm table-striped">
+                <thead class="custom-header">
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Nume Produs</th>
+                        <th scope="col">Tip Produs</th>
+                        <th scope="col">Cost Producere</th>
+                        <th scope="col">Preț Recomandat</th>
+                        <th scope="col">Preț Curent</th>
+                        <th scope="col">Descriere</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var obj in Model)
+                    {
+                        <tr class="table-secondary">
+                            <td>@obj.IdProdus</td>
+                            <td>@obj.NumeProdus</td>
+                            <td>@obj.TipProdus</td>
+                            <td>@obj.CostProducere</td>
+                            <td>@obj.PretRecomandat</td>
+                            <td>@obj.PretCurent</td>
+                            <td>@obj.Descriere</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

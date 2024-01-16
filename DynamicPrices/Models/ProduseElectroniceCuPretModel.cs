@@ -1,11 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 
 namespace DynamicPrices.Models
 {
-    public class AddProdusElectronicModel
+    public class ProduseElectroniceCuPretModel
     {
+        public int IdProdus { get; set; }
+
         [Required(ErrorMessage = "Numele produsului este obligatoriu!")]
         [DisplayName("Nume Produs")]
         [MaxLength(100)]
@@ -25,13 +26,14 @@ namespace DynamicPrices.Models
         [DisplayName("Preț Recomandat")]
         [Range(0.00, 999999.99, ErrorMessage = "Preț invalid!")]
         public decimal PretRecomandat { get; set; }
-        
+
+
+        [Required(ErrorMessage = "Descrierea produsului este obligatorie!")]
+        public string Descriere { get; set; }
+
         [Required(ErrorMessage = "Prețul produsului este obligatoriu!")]
         [DisplayName("Preț Curent")]
         [Range(0.00, 999999.99, ErrorMessage = "Preț invalid!")]
         public decimal PretCurent { get; set; }
-
-        [Required(ErrorMessage = "Descrierea produsului este obligatorie!")]
-        public string Descriere { get; set; }
     }
 }

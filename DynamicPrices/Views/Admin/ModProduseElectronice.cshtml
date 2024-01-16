@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.MenuAdmin = true;
+    ViewBag.ShowFooter = false;
+}
+@model List<ProduseElectroniceCuPretModel>
+
+<link rel="stylesheet" href="~/css/admin-style.css" />
+<script src="~/js/script-admin.js"></script>
+
+<div class="page-container">
+    <div class="page-content pb-4">
+        <div class="px-0 m-0 pt-1 d-flex justify-content-between">
+            <div><h4 class="text-primary my-3 ps-5" style="font-size: 1.4vw">Modificare / Ștergere Produse Electronice</h4></div>
+            <div class="input-group-sm me-4 ms-2 pt-1">
+                <input type="search" id="search-product" class="form-control border border-secondary" style="width: 16em; font-size: 1.3vw" placeholder="Caută produs..." oninput="searchProduct()">
+            </div>
+        </div>
+        <hr class="mt-0" />
+        <div class="table-info px-1 pt-0">
+            <table class="tabel-mod table table-dark table-sm table-striped">
+               <thead class="custom-header4">
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Nume Produs</th>
+                        <th scope="col">Tip Produs</th>
+                        <th scope="col">Cost Producere</th>
+                        <th scope="col">Preț Recomandat</th>
+                        <th scope="col">Preț Curent</th>
+                        <th scope="col">Descriere</th>
+                        <th scope="col">Modifică / Șterge</th>
+                    </tr>
+               </thead>
+               <tbody>
+                   @foreach(var obj in Model)
+                    {
+                        <tr class="table-secondary">
+                            <td>@obj.IdProdus</td>
+                            <td>@obj.NumeProdus</td>
+                            <td>@obj.TipProdus</td>
+                            <td>@obj.CostProducere</td>
+                            <td>@obj.PretRecomandat</td>
+                            <td>@obj.PretCurent</td>
+                            <td>@obj.Descriere</td>
+                            <td>
+                                <div class="btn-group d-flex" role="group">
+                                    <a asp-controller="Admin" asp-action="EditProduseElectronice" asp-route-id="@obj.IdProdus" class="edit btn btn-info btn-sm mx-2">
+                                        <i class="bi bi-pencil"></i> Edit
+                                    </a>
+                                    <a asp-controller="Admin" asp-action="Delete" class="delete btn btn-danger btn-sm mx-2">
+                                    <i class="bi bi-x-circle"></i> Delete
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

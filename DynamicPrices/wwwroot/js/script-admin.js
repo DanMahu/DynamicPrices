@@ -8,6 +8,25 @@ document.addEventListener('DOMContentLoaded', () => {
     sidebarToggleBtn.addEventListener('click', toggleSidebar);
 })
 
+function searchProduct() {
+    var input, filter, table, tr, td;
+    input = document.getElementById('search-product');
+    filter = input.value.toUpperCase();
+    table = document.querySelector('.table');
+    tr = table.getElementsByTagName('tr');
+
+    for (var i = 1; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName('td')[1];
+        if (td) {
+            var txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = '';
+            } else {
+                tr[i].style.display = 'none';
+            }
+        }
+    }
+}
 
 /*
 <div class="d-flex p-0">
@@ -29,69 +48,6 @@ function goBackToSelect() {
     document.getElementById('select-type').classList.remove('d-none');
 }
 */
-
-function manage(category) {
-    if (document.querySelector('.options').classList.contains('d-none')) {
-        document.querySelector('.options').classList.remove('d-none');
-    }
-    document.getElementById('add-electronice').classList.add('d-none');
-    document.getElementById('mod-electronice').classList.add('d-none');
-    switch (category) {
-        case 'electronice':
-            if (document.getElementById('add-electronice').classList.contains('d-none') && document.getElementById('mod-electronice').classList.contains('d-none')) {
-                document.getElementById('add-electronice').classList.remove('d-none');
-                document.getElementById('mod-electronice').classList.remove('d-none');
-            }
-
-            fetch('/Admin/AllProduseElectronice')
-                .then(Response => Response.json())
-                .then(data => {
-                    const table_info = document.querySelector('.table-info');
-                    table_info.innerHTML = '';
-                    if (data && data.length > 0) {
-                        const table = document.createElement('table');
-                        table.className = 'table table-dark table-sm table-striped';
-                        const thead = document.createElement('thead');
-                        thead.className = 'custom-header';
-                        thead.innerHTML = `
-                            <tr>
-                                <th scope="col">Id</th>
-                                <th scope="col">Nume Produs</th>
-                                <th scope="col">Tip Produs</th>
-                                <th scope="col">Cost Producere</th>
-                                <th scope="col">Preț Recomandat</th>
-                                <th scope="col">Preț Curent</th>
-                                <th scope="col">Descriere</th>
-                            </tr>
-                        `;
-                        table.appendChild(thead);
-                        const tbody = document.createElement('tbody');
-                        data.forEach(produs => {
-                            const tr = document.createElement('tr');
-                            tr.classList.add('table-secondary')
-                            tr.innerHTML = `
-                                <td>${produs['IdProdus']}</td>
-                                <td>${produs['NumeProdus']}</td>
-                                <td>${produs['TipProdus']}</td>
-                                <td>${produs['CostProducere'].toFixed(2)}</td>
-                                <td>${produs['PretRecomandat'].toFixed(2)}</td>
-                                <td>${produs['PretCurent'].toFixed(2)}</td>
-                                <td>${produs['Descriere']}</td>     
-                            `;
-                            tbody.appendChild(tr);
-                        });
-                        table.appendChild(tbody);
-                        table_info.appendChild(table);
-                    } else {
-                        table_info.innerHTML = '<p>Niciun produs disponibil.</p>';
-                    }
-                })
-                .catch(error => {
-                    console.error('Eroare: ', error);
-                });
-            break;
-    }
-}
 
 function showProductTypes() {
     fetch('/Admin/TipProduse')

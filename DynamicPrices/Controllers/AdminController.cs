@@ -21,6 +21,26 @@ namespace DynamicPrices.Controllers
             return View();
         }
 
+        public IActionResult Electronice()
+        {
+            List<ProduseElectroniceCuPretModel> produseCuPretList = (from p in _db.produse_electronice
+                                                                  join pe in _db.preturi_electronice
+                                                                  on p.IdProdus equals pe.IdProdus
+                                                                  select new ProduseElectroniceCuPretModel
+                                                                  {
+                                                                      IdProdus = p.IdProdus,
+                                                                      NumeProdus = p.NumeProdus,
+                                                                      TipProdus = p.TipProdus,
+                                                                      CostProducere = p.CostProducere,
+                                                                      PretRecomandat = p.PretRecomandat,
+                                                                      PretCurent = pe.PretCurent,
+                                                                      Descriere = p.Descriere
+
+                                                                  }).ToList();
+
+            return View(produseCuPretList);
+        }
+
         public IActionResult TipProduse()
         {
             Dictionary<string, int> tipuriProduse = _produseService.GetTipProduseElectronice();
@@ -37,13 +57,13 @@ namespace DynamicPrices.Controllers
             return Json(produse);
         }
 
-        public ActionResult AddProduseElectronice() {
+        public IActionResult AddProduseElectronice() {
 
             return View();
         }
 
         [HttpPost]
-        public ActionResult AddProduseElectronice(AddProdusElectronicModel obj)
+        public IActionResult AddProduseElectronice(AddProdusElectronicModel obj)
         {
             if (ModelState.IsValid)
             {
@@ -73,6 +93,104 @@ namespace DynamicPrices.Controllers
                     _db.SaveChanges();
 
                     return RedirectToAction("Admin");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Exception: {ex.Message}");
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        public IActionResult ModProduseElectronice()
+        {
+            List<ProduseElectroniceCuPretModel> produseCuPretList = (from p in _db.produse_electronice
+                                                                  join pe in _db.preturi_electronice
+                                                                  on p.IdProdus equals pe.IdProdus
+                                                                  select new ProduseElectroniceCuPretModel
+                                                                  {
+                                                                      IdProdus = p.IdProdus,
+                                                                      NumeProdus = p.NumeProdus,
+                                                                      TipProdus = p.TipProdus,
+                                                                      CostProducere = p.CostProducere,
+                                                                      PretRecomandat = p.PretRecomandat,
+                                                                      PretCurent = pe.PretCurent,
+                                                                      Descriere = p.Descriere
+
+                                                                  }).ToList();
+
+            return View(produseCuPretList);
+        }
+
+        public IActionResult EditProduseElectronice(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var produseDinDB = (from p in _db.produse_electronice
+                                join pe in _db.preturi_electronice
+                                on p.IdProdus equals pe.IdProdus
+                                where p.IdProdus == id
+                                select new ProduseElectroniceCuPretModel
+                                {
+
+                                    IdProdus = p.IdProdus,
+                                    NumeProdus = p.NumeProdus,
+                                    TipProdus = p.TipProdus,
+                                    CostProducere = p.CostProducere,
+                                    PretRecomandat = p.PretRecomandat,
+                                    PretCurent = pe.PretCurent,
+                                    Descriere = p.Descriere
+                                }).FirstOrDefault();
+            if (produseDinDB == null)
+            {
+                return NotFound();
+            }
+
+            return View(produseDinDB);
+        }
+
+        [HttpPost]
+        public IActionResult EditProduseElectronice(ProduseElectroniceCuPretModel obj)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var produsElectronic = _db.produse_electronice.Find(obj.IdProdus);
+                    if (produsElectronic == null)
+                    {
+                        Console.WriteLine("See pare ca este NULL!");
+                        return NotFound();
+                    }
+
+                    produsElectronic.NumeProdus = obj.NumeProdus;
+                    produsElectronic.TipProdus = obj.TipProdus;
+                    produsElectronic.CostProducere = obj.CostProducere;
+                    produsElectronic.PretRecomandat = obj.PretRecomandat;
+                    produsElectronic.Descriere = obj.Descriere;
+
+                    _db.produse_electronice.Update(produsElectronic);
+                    _db.SaveChanges();
+
+                    var pretCurent = _db.preturi_electronice.Find(obj.IdProdus);
+                    if (pretCurent == null)
+                    {
+                        return NotFound();
+                    }
+
+                    pretCurent.PretCurent = obj.PretCurent;
+                    pretCurent.DataActualizare = DateTime.Now;
+
+                    _db.preturi_electronice.Update(pretCurent);
+                    _db.SaveChanges();
+
+                    return RedirectToAction("ModProduseElectronice", "Admin");
                 }
                 catch (Exception ex)
                 {
