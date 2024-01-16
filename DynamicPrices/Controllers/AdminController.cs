@@ -162,10 +162,10 @@ namespace DynamicPrices.Controllers
             {
                 try
                 {
+                    //actualizeaza tabelul de produse
                     var produsElectronic = _db.produse_electronice.Find(obj.IdProdus);
                     if (produsElectronic == null)
                     {
-                        Console.WriteLine("See pare ca este NULL!");
                         return NotFound();
                     }
 
@@ -178,16 +178,79 @@ namespace DynamicPrices.Controllers
                     _db.produse_electronice.Update(produsElectronic);
                     _db.SaveChanges();
 
-                    var pretCurent = _db.preturi_electronice.Find(obj.IdProdus);
-                    if (pretCurent == null)
+                    //actualizeaza tabelul de preturi
+                    var pret = _db.preturi_electronice.Find(obj.IdProdus);
+                    if (pret == null)
                     {
                         return NotFound();
                     }
 
-                    pretCurent.PretCurent = obj.PretCurent;
-                    pretCurent.DataActualizare = DateTime.Now;
+                    decimal pretVechi = pret.PretCurent;
 
-                    _db.preturi_electronice.Update(pretCurent);
+                    pret.PretCurent = obj.PretCurent;
+                    pret.DataActualizare = DateTime.Now;
+
+                    _db.preturi_electronice.Update(pret);
+                    _db.SaveChanges();
+
+                    //insereaza pretul in istoric
+                    if (pretVechi != pret.PretCurent)
+                    {
+                        var istoricPret = new Istoric_Preturi_Electronice
+                        {
+                            IdProdus = obj.IdProdus,
+                            PretVechi = pretVechi,
+                            PretNou = obj.PretCurent,
+                            DataModificare = DateTime.Now
+                        };
+
+                        _db.istoric_preturi_electronice.Add(istoricPret);
+                        _db.SaveChanges();
+                    }
+
+                    return RedirectToAction("ModProduseElectronice", "Admin");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Exception: {ex.Message}");
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        public IActionResult DeleteProduseElectronice(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            Produse_Electronice? produsDinDB = _db.produse_electronice.Find(id);
+            if (produsDinDB == null)
+            {
+                return NotFound();
+            }
+
+            return View(produsDinDB);
+        }
+
+        [HttpPost, ActionName("DeleteProduseElectronice")]
+        public IActionResult DeleteProduseElectronicePOST(int? id)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    //sterge produsul si datele acestuia din baza de date
+                    Produse_Electronice? produsDinDB = _db.produse_electronice.Find(id);
+                    if (produsDinDB == null)
+                    {
+                        return NotFound();
+                    }
+                    _db.produse_electronice.Remove(produsDinDB);
                     _db.SaveChanges();
 
                     return RedirectToAction("ModProduseElectronice", "Admin");

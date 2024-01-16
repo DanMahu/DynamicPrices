@@ -12,5 +12,6 @@ namespace DynamicPricing.Data
 
         public DbSet<Produse_Electronice> produse_electronice { get; set; }
         public DbSet<Preturi_Electronice> preturi_electronice { get; set; }
+        public DbSet<Istoric_Preturi_Electronice> istoric_preturi_electronice { get; set; }
     }
 }

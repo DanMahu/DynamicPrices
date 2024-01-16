@@ -127,7 +127,7 @@ namespace DynamicPrices
             List<object> priceHistory = new List<object>();
             using (MySqlConnection connection = _databaseService.GetConnection())
             {
-                string sql = "select p.NumeProdus, i.pret_vechi, i.pret_nou, i.data_modificare from istoric_preturi_electronice i join produse_electronice p on i.id_produs = p.IdProdus where p.IdProdus = @product_id";
+                string sql = "select p.NumeProdus, i.PretVechi, i.PretNou, i.DataModificare from istoric_preturi_electronice i join produse_electronice p on i.IdProdus = p.IdProdus where p.IdProdus = @product_id";
                 using (MySqlCommand command = new MySqlCommand(sql, connection))
                 {
                     command.Parameters.AddWithValue("@product_id", product_id);
@@ -136,9 +136,9 @@ namespace DynamicPrices
                     {
                         while(reader.Read())
                         {
-                            decimal pret_vechi = reader.GetDecimal(reader.GetOrdinal("pret_vechi"));
-                            decimal pret_nou = reader.GetDecimal(reader.GetOrdinal("pret_nou"));
-                            DateTime data_mod = reader.GetDateTime(reader.GetOrdinal("data_modificare"));
+                            decimal pret_vechi = reader.GetDecimal(reader.GetOrdinal("PretVechi"));
+                            decimal pret_nou = reader.GetDecimal(reader.GetOrdinal("PretNou"));
+                            DateTime data_mod = reader.GetDateTime(reader.GetOrdinal("DataModificare"));
                             string data_modificare = data_mod.ToString("dd-MM-yyyy");
 
                             var data = new
