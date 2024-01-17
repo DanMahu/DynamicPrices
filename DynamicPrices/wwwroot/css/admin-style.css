@@ -4,7 +4,9 @@
 }
 
 body {
-    background-image: linear-gradient(45deg, #93a5cf 0%, #e4efe9 100%);
+    /*background-image: linear-gradient(45deg, #93a5cf 0%, #e4efe9 100%);*/
+    background-image: url(https://images.wallpaperscraft.com/image/single/forest_sky_fog_110519_3840x2160.jpg);
+    background-size: cover;
 }
 
 .page-container {
@@ -140,7 +142,7 @@ table tbody td:last-child {
 }
 
 .tabel-clienti tbody td {
-    font-size: 0.8vw;
+    font-size: 1vw;
 }
 
 .tabel-clienti tbody td:last-child {
@@ -148,7 +150,7 @@ table tbody td:last-child {
 }
 
 .custom-header5 th {
-    font-size: 0.9vw;
+    font-size: 1vw;
     text-align: center;
 }
 

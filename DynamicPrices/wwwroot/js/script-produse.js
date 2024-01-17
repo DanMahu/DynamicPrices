@@ -237,6 +237,7 @@ function showOptions(idProdus, numeProdus) {
             .then(([pret, stoc]) => {
                 if (pret != null) {
                     const aPret = document.createElement('a');
+                    aPret.style = "color: white";
                     aPret.innerHTML = `Preț Curent (${pret.toFixed(2)})`;
                     setTimeout(() => {
                         div.appendChild(aPret);
@@ -280,6 +281,7 @@ options.addEventListener('mouseover', function () {
 options.addEventListener('mouseleave', function () {
     timer = setTimeout(() => {
         options.classList.remove('afisat');
+        options.innerHTML = '';
     }, 900);
     lastId = undefined;
 });

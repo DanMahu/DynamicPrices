@@ -1,41 +1,46 @@
 ﻿<link rel="stylesheet" href="~/css/produse-style.css" />
 @model Dictionary<string, int>
-<div class="page-container">
-    <div class="sidebar">
-        <div class="dropdown-produse">
-            <button class="button-produse bg-primary" onclick="showDetails('p-dropdown')">Produse</button>
-            <div id="p-dropdown" class="dropdown-content">
-                <a href="#Electronice" onclick="showMenu('electronice')">Electronice</a>
-                <a href="#n2">Produs2</a>
-                <a href="#n3">Produs3</a>
-            </div>
+<div class="sidebar bg-primary">
+    <div class="dropdown-produse">
+        <button class="button-produse bg-primary" onclick="showDetails('p-dropdown')">Produse</button>
+        <div id="p-dropdown" class="dropdown-content">
+            <a href="#Electronice" onclick="showMenu('electronice')">Electronice</a>
+            <a href="#n2">-/-/-</a>
+            <a href="#n3">-/-/-</a>
         </div>
-        <div class="dropdown-tip-produse" id="electronice">
-            <button class="button-tip-produse bg-primary" id="btt-tip-produse" onclick="showDetails('tip-dropdown')">Electronice</button>
-            <div id="tip-dropdown" class="tip-dropdown-content">
-                @{
-                    if (Model != null)
+    </div>
+    <div class="dropdown-tip-produse" id="electronice">
+        <button class="button-tip-produse bg-primary" id="btt-tip-produse" onclick="showDetails('tip-dropdown')">Electronice</button>
+        <div id="tip-dropdown" class="tip-dropdown-content">
+            @{
+                if (Model != null)
+                {
+                    foreach (var pair in Model)
                     {
-                        foreach (var pair in Model)
-                        {
-                            <a href="#@(pair.Key)" onclick="showProductsByType('@(pair.Key)')">@pair.Key (@pair.Value)</a>
-                        }
-                    }
-                    else
-                    {
-                        <a href="#">-EROARE-</a>
+                        <a href="#@(pair.Key)" onclick="showProductsByType('@(pair.Key)')">@pair.Key (@pair.Value)</a>
                     }
                 }
+                else
+                {
+                    <a href="#">-EROARE-</a>
+                }
+            }
+        </div>
+    </div>
+    <div class="dropdown-tip-produse" id="detalii-produse">
+        <button class="button-detalii bg-primary" id="btt-detalii" onclick="showDetails('detalii-dropdown')">Detalii</button>
+        <div id="detalii-dropdown" class="detalii-dropdown-content"></div>
+    </div>
+    <div class="multiple-options" id="multiple-options"></div>
+</div>
+
+<div class="page-container">
+    <div class="container-produse">
+        <div class="container-info">
+            <div class="d-flex align-items-center w-100 h-100">
+                <i class="bi bi-boxes box_"></i>
             </div>
         </div>
-        <div class="dropdown-tip-produse" id="detalii-produse">
-            <button class="button-detalii bg-primary" id="btt-detalii" onclick="showDetails('detalii-dropdown')">Detalii</button>
-            <div id="detalii-dropdown" class="detalii-dropdown-content"></div>
-        </div>
-        <div class="multiple-options" id="multiple-options"></div>
-    </div>
-    <div class="container-produse">
-        <div class="container-info"></div>
     </div>
 </div>
 

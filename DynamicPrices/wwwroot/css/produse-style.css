@@ -1,11 +1,17 @@
 ﻿body {
     /*background-color: gainsboro;*/
-    /*background-image: url("https://images.wallpaperscraft.com/image/single/forest_trees_fog_110131_4928x3264.jpg");
-    background-size: cover;*/
-    background-image: linear-gradient( 110.3deg, rgba(73,93,109,1) 4.3%, rgba(49,55,82,1) 96.7% );
+    background-image: url("https://images.wallpaperscraft.com/image/single/forest_trees_fog_110131_4928x3264.jpg");
+    background-size: cover;
+    /*background-image: linear-gradient( 110.3deg, rgba(73,93,109,1) 4.3%, rgba(49,55,82,1) 96.7% );*/
     /*alt bg*/
     /*background-image: radial-gradient( circle 993px at 0.5% 50.5%,  rgba(137,171,245,0.37) 0%, rgba(245,247,252,1) 100.2% );*/
     margin-bottom: 0px;
+}
+
+.box_ {
+    color: #ffffff48;
+    font-size: 15vw;
+    margin: 0 auto;
 }
 
 .main-container {
@@ -18,17 +24,19 @@
 }
 
 .sidebar {
-    position: absolute;
-    margin-left: 0.5%;
-    width: 13%;
-    height: 37.5em;
+    position: fixed;
+    margin-top: -0.5%;
+    left: 0px;
+    /*margin-left: 0.5%;*/
+    width: 14%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* border: 1px solid rgb(41, 41, 41);*/
-    border: 1px solid rgb(27, 62, 96);
-    border-radius: 5px;
-    background-image: radial-gradient( circle 1224px at 10.6% 8.8%, rgba(255,255,255,1) 0%, rgba(153,202,251,1) 100.2% );
+    border: 1px solid rgb(41, 41, 41);
+    /*border: 1px solid rgb(27, 62, 96);*/
+    /*border-radius: 3px;*/
+    /*background-image: radial-gradient( circle 1224px at 10.6% 8.8%, rgba(255,255,255,1) 0%, rgba(153,202,251,1) 100.2% );*/
 }
 
 .dropdown-produse, .dropdown-tip-produse {
@@ -55,36 +63,35 @@
 }
 
 .dropdown-content, .tip-dropdown-content, .detalii-dropdown-content {
-    background-color: ghostwhite;
     display: none;
     position: relative;
     width: 100%;
-    border-radius: 3px;
-    border-left: 1px solid rgb(27, 62, 96);
-    border-right: 1px solid rgb(27, 62, 96);
+    border-left: 1px solid rgb(41, 41, 41);
+    border-right: 1px solid rgb(41, 41, 41);
 }
 
 .dropdown-content a, .tip-dropdown-content a {
-    color: black;
+    color: white;
     padding: 0.2em 1em;
     text-decoration: none;
     display: block;
-    border-bottom: 1px solid rgb(27, 62, 96);
+    border-bottom: 1px solid rgb(41, 41, 41);
     font-size: 0.9vw;
+    text-indent: 5px;
 }
 
 .detalii-dropdown-content a {
     width: 14.9em;
     font-size: 0.8vw;
-    color: black;
+    color: white;
     text-decoration: none;
     display: block;
     padding: 0.3em 0.5em;
-    border-bottom: 1px solid rgb(27, 62, 96);
+    border-bottom: 1px solid rgb(41, 41, 41);
 }
 
 .dropdown-produse a:hover, .dropdown-tip-produse a:hover{
-    background-color: #ddd;
+    background-color: #ffffff2e;
 }
 
 .show {
@@ -111,12 +118,13 @@
 .search-bar {
     width: 10.85em;
     border: none;
-    border-bottom: 1px solid rgb(27, 62, 96);
+    border-bottom: 1px solid rgb(41, 41, 41);
     outline: none;
     font-size: 1.1vw;
     padding-left: 0.5em;
     display: block;
-    background-color: transparent;
+    background-color: #ffffff08;
+    color: white;
 }
 
 @media (max-width: 768px) {
@@ -124,7 +132,7 @@
         margin-left: 3em;
     }
     .button-tip-produse::after {
-        margin-left: 1.5em;
+        margin-left: 1.7em;
     }
     .button-detalii::after {
         margin-left: 3.6em;
@@ -145,11 +153,14 @@
 }
 
 @media (min-width: 768px) {
+    .button-produse::after {
+        margin-left: 4.4em;
+    }
     .button-tip-produse::after {
-        margin-left: 3em;
+        margin-left: 3.2em;
     }
     .button-detalii::after {
-        margin-left: 5.15em;
+        margin-left: 5.2em;
     }
     .dropdown-tip-produse {
         margin-top: 0.5em;
@@ -158,13 +169,17 @@
 
 .container-produse {
     /*border: 1px solid rgb(41, 41, 41);*/
-    border: 1px solid rgb(27, 62, 96);
-    border-radius: 5px;
-    background-image: radial-gradient( circle 1224px at 10.6% 8.8%, rgba(255,255,255,1) 0%, rgba(153,202,251,1) 100.2% );
-    width: 85.8%;
+    border: 1px solid #ececec31;
+    border-radius: 3px;
+    /*background-image: linear-gradient(45deg, #93a5cf 0%, #e4efe9 100%);*/
+    /*background-image: linear-gradient(45deg, #93a5cf5d 0%, #e4efe931 100%);*/
+    background-image: linear-gradient(135deg, #f5f7fa6d 0%, #c3cfe270 100%);
+    width: 85%;
     /*margin-left: 0.6%;*/
-    margin-left: 13.8%;
-    height: 39em;
+    margin-left: 14.8%;
+    margin-right: 0.6%;
+    margin-top: -0.1%;
+    min-height: 81vh;
     font-size: 1vw;
     display: flex;
     flex-direction: column;
@@ -195,31 +210,32 @@
     /* width: 11em;*/
     width: 0;
     overflow: hidden;
-    height: 43.4em;
+    height: 100%;
     top: -1px;
     /*right: -10.85em;*/
-    left: 14.3em;
-    background-image: radial-gradient( circle 1224px at 10.6% 8.8%, rgba(255,255,255,1) 0%, rgba(153,202,251,1) 100.2% );
-    border-radius: 5px;
+    left: 15em;
+    /*background-image: radial-gradient( circle 1224px at 10.6% 8.8%, rgba(255,255,255,1) 0%, rgba(153,202,251,1) 100.2% );*/
     font-size: 0.9vw;
     display: flex;
     flex-direction: column;
     align-items: end;
-    transition: width 0.2s ease, opacity 0.6s ease;
+    transition: width 0.6s ease, opacity 0.6s ease;
     opacity: 0;
 }
 
 #multiple-options.afisat {
-    width: 12.5em;
-    border: 1px solid rgb(27, 62, 96);
+    width: 14em;
+    border-right: 1.5px solid rgb(41, 41, 41);
+    background-color: #1d1d1df7;
     opacity: 1;
 }
 
 .multiple-options a {
     text-decoration: none;
-    color: #333;
+    color: darkgrey;
     margin-top: 0.8em;
-    margin-right: 0.8em;   
+    margin-right: 0.8em;
+    text-align: end;
 }
 
 .multiple-options .a-option {
@@ -228,7 +244,13 @@
 
 .multiple-options .a-option:hover {
     letter-spacing: 0.5px;
-    color: lightseagreen;
+    color: white;
+    /*color: lightseagreen;*/
+}
+
+table {
+    border-radius: 3px;
+    overflow: hidden;
 }
 
 table tbody td {
