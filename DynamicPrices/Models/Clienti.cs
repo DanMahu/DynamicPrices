@@ -17,7 +17,6 @@ namespace DynamicPrices.Models
         [Column(TypeName = "varchar(100)")]
         public string Email { get; set; }
 
-        [Column(TypeName = "varchar(50)")]
-        public string Telefon {  get; set; }
+        public int Telefon {  get; set; }
     }
 }
