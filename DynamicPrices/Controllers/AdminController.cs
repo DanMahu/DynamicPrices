@@ -1,6 +1,7 @@
 ﻿using DynamicPrices.Models;
 using DynamicPricing.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DynamicPrices.Controllers
@@ -21,22 +22,29 @@ namespace DynamicPrices.Controllers
             return View();
         }
 
+        public IActionResult Clienti()
+        {
+            List<Clienti> clienti = _db.clienti.ToList();
+
+            return View(clienti);
+        }
+
         public IActionResult Electronice()
         {
             List<ProduseElectroniceCuPretModel> produseCuPretList = (from p in _db.produse_electronice
-                                                                  join pe in _db.preturi_electronice
-                                                                  on p.IdProdus equals pe.IdProdus
-                                                                  select new ProduseElectroniceCuPretModel
-                                                                  {
-                                                                      IdProdus = p.IdProdus,
-                                                                      NumeProdus = p.NumeProdus,
-                                                                      TipProdus = p.TipProdus,
-                                                                      CostProducere = p.CostProducere,
-                                                                      PretRecomandat = p.PretRecomandat,
-                                                                      PretCurent = pe.PretCurent,
-                                                                      Descriere = p.Descriere
+                                                                     join pe in _db.preturi_electronice
+                                                                     on p.IdProdus equals pe.IdProdus
+                                                                     select new ProduseElectroniceCuPretModel
+                                                                     {
+                                                                         IdProdus = p.IdProdus,
+                                                                         NumeProdus = p.NumeProdus,
+                                                                         TipProdus = p.TipProdus,
+                                                                         CostProducere = p.CostProducere,
+                                                                         PretRecomandat = p.PretRecomandat,
+                                                                         PretCurent = pe.PretCurent,
+                                                                         Descriere = p.Descriere
 
-                                                                  }).ToList();
+                                                                     }).ToList();
 
             return View(produseCuPretList);
         }
@@ -92,7 +100,18 @@ namespace DynamicPrices.Controllers
                     _db.preturi_electronice.Add(pretCurent);
                     _db.SaveChanges();
 
-                    return RedirectToAction("Admin");
+                    Stoc_Electronice stocNou = new Stoc_Electronice
+                    {
+                        IdProdus = idProdus,
+                        InStoc = obj.InStoc,
+                        StocMinim = obj.StocMinim,
+                        StocMaxim = obj.StocMaxim
+                    };
+
+                    _db.stoc_electronice.Add(stocNou);
+                    _db.SaveChanges();
+
+                    return RedirectToAction("Electronice", "Admin");
                 }
                 catch (Exception ex)
                 {
@@ -109,19 +128,19 @@ namespace DynamicPrices.Controllers
         public IActionResult ModProduseElectronice()
         {
             List<ProduseElectroniceCuPretModel> produseCuPretList = (from p in _db.produse_electronice
-                                                                  join pe in _db.preturi_electronice
-                                                                  on p.IdProdus equals pe.IdProdus
-                                                                  select new ProduseElectroniceCuPretModel
-                                                                  {
-                                                                      IdProdus = p.IdProdus,
-                                                                      NumeProdus = p.NumeProdus,
-                                                                      TipProdus = p.TipProdus,
-                                                                      CostProducere = p.CostProducere,
-                                                                      PretRecomandat = p.PretRecomandat,
-                                                                      PretCurent = pe.PretCurent,
-                                                                      Descriere = p.Descriere
+                                                                     join pe in _db.preturi_electronice
+                                                                     on p.IdProdus equals pe.IdProdus
+                                                                     select new ProduseElectroniceCuPretModel
+                                                                     {
+                                                                         IdProdus = p.IdProdus,
+                                                                         NumeProdus = p.NumeProdus,
+                                                                         TipProdus = p.TipProdus,
+                                                                         CostProducere = p.CostProducere,
+                                                                         PretRecomandat = p.PretRecomandat,
+                                                                         PretCurent = pe.PretCurent,
+                                                                         Descriere = p.Descriere
 
-                                                                  }).ToList();
+                                                                     }).ToList();
 
             return View(produseCuPretList);
         }
@@ -228,42 +247,65 @@ namespace DynamicPrices.Controllers
             {
                 return NotFound();
             }
-            Produse_Electronice? produsDinDB = _db.produse_electronice.Find(id);
-            if (produsDinDB == null)
+            var produseDinDB = (from p in _db.produse_electronice
+                                join pe in _db.preturi_electronice
+                                on p.IdProdus equals pe.IdProdus
+                                join s in _db.stoc_electronice
+                                on p.IdProdus equals s.IdProdus
+                                where p.IdProdus == id
+                                select new ProduseElectroniceCuPretModel
+                                {
+
+                                    IdProdus = p.IdProdus,
+                                    NumeProdus = p.NumeProdus,
+                                    TipProdus = p.TipProdus,
+                                    CostProducere = p.CostProducere,
+                                    PretRecomandat = p.PretRecomandat,
+                                    PretCurent = pe.PretCurent,
+                                    Descriere = p.Descriere,
+                                    InStoc = s.InStoc,
+                                    StocMinim = s.StocMinim,
+                                    StocMaxim = s.StocMaxim
+                                }).FirstOrDefault();
+            if (produseDinDB == null)
             {
                 return NotFound();
             }
 
-            return View(produsDinDB);
+            return View(produseDinDB);
         }
 
         [HttpPost, ActionName("DeleteProduseElectronice")]
         public IActionResult DeleteProduseElectronicePOST(int? id)
         {
-            if (ModelState.IsValid)
+            try
             {
-                try
+                //sterge produsul si datele acestuia din baza de date
+                if (id == null || id == 0)
                 {
-                    //sterge produsul si datele acestuia din baza de date
-                    Produse_Electronice? produsDinDB = _db.produse_electronice.Find(id);
-                    if (produsDinDB == null)
-                    {
-                        return NotFound();
-                    }
-                    _db.produse_electronice.Remove(produsDinDB);
-                    _db.SaveChanges();
+                    return NotFound();
+                }
 
-                    return RedirectToAction("ModProduseElectronice", "Admin");
-                }
-                catch (Exception ex)
+                Produse_Electronice? produs = _db.produse_electronice.FirstOrDefault(p => p.IdProdus == id);
+                Preturi_Electronice? pret = _db.preturi_electronice.FirstOrDefault(p => p.IdProdus == id);
+                Stoc_Electronice? stoc = _db.stoc_electronice.FirstOrDefault(p => p.IdProdus == id);
+                Istoric_Preturi_Electronice? istoric = _db.istoric_preturi_electronice.FirstOrDefault(p => p.IdProdus == id);
+                if (produs == null && pret == null && stoc == null && istoric == null)
                 {
-                    Console.WriteLine($"Exception: {ex.Message}");
-                    return RedirectToAction("Index", "Home");
+                    return NotFound();
                 }
+                _db.produse_electronice.Remove(produs);
+                _db.preturi_electronice.Remove(pret);
+                _db.stoc_electronice.Remove(stoc);
+                _db.istoric_preturi_electronice.RemoveRange(istoric);
+                _db.SaveChanges();
+
+                return RedirectToAction("ModProduseElectronice", "Admin");
             }
-            else
+            catch (Exception ex)
             {
-                return View();
+                Console.WriteLine($"Exception: {ex.Message}");
+                return RedirectToAction("Index", "Home");
             }
         }
     }

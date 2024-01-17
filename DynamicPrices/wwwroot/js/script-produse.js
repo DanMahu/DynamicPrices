@@ -176,7 +176,7 @@ function showMinMaxStoc(idProdus, numeProdus) {
                         <th colspan="3">${numeProdus}</th>
                     </tr>
                     <tr>
-                        <th>Cantitate</th>
+                        <th>În Stoc</th>
                         <th>Stoc Minim</th>
                         <th>Stoc Maxim</th>
                     </tr>

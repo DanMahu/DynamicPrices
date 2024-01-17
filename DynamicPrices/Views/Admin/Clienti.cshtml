@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.MenuAdmin = true;
+    ViewBag.ShowFooter = false;
+}
+@model List<Clienti>
+<link rel="stylesheet" href="~/css/admin-style.css" />
+<script src="~/js/script-admin.js"></script>
+
+<div class="page-container">
+    <div class="page-content pb-4">
+        <div class="px-0 m-0 pt-1 d-flex justify-content-between">
+            <div><h4 class="text-primary my-3 ps-5" style="font-size: 1.4vw">Clienți</h4></div>
+            @* <div class="input-group-sm me-4 ms-2 pt-1">
+                <input type="search" id="search-product" class="form-control border border-secondary" style="width: 16em; font-size: 1.3vw" placeholder="Caută client...">
+            </div> *@
+        </div>
+        <hr class="mt-0" />
+        <div class="table-info px-4 pt-0">
+            <table class="tabel-clienti table table-dark table-sm table-striped">
+                <thead class="custom-header5">
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Nume</th>
+                        <th scope="col">Prenume</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Telefon</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var obj in Model)
+                    {
+                        <tr class="table-secondary">
+                            <td>@obj.IdClient</td>
+                            <td>@obj.Nume</td>
+                            <td>@obj.Prenume</td>
+                            <td>@obj.Email</td>
+                            <td>@obj.Telefon</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

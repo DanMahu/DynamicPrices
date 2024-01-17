@@ -3,6 +3,7 @@ using System;
 using DynamicPricing.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DynamicPrices.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240117183126_AddTabelIstoricPreturiElectronice")]
+    partial class AddTabelIstoricPreturiElectronice
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -124,61 +127,6 @@ namespace DynamicPrices.Migrations
                     b.ToTable("produse_electronice");
                 });
 
-            modelBuilder.Entity("DynamicPrices.Models.Stoc_Electronice", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdProdus")
-                        .HasColumnType("int");
-
-                    b.Property<int>("InStoc")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StocMaxim")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StocMinim")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IdProdus");
-
-                    b.ToTable("stoc_electronice");
-                });
-
-            modelBuilder.Entity("DynamicPrices.Models.Vanzari_Electronice", b =>
-                {
-                    b.Property<int>("IdTranzactie")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("Cantitate")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DataTranzactie")
-                        .HasColumnType("datetime");
-
-                    b.Property<int>("IdClient")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdProdus")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("PretTotal")
-                        .HasColumnType("decimal(10, 2)");
-
-                    b.HasKey("IdTranzactie");
-
-                    b.HasIndex("IdClient");
-
-                    b.HasIndex("IdProdus");
-
-                    b.ToTable("vanzari_electronice");
-                });
-
             modelBuilder.Entity("DynamicPrices.Models.Istoric_Preturi_Electronice", b =>
                 {
                     b.HasOne("DynamicPrices.Models.Produse_Electronice", "Produse_Electronice")
@@ -197,36 +145,6 @@ namespace DynamicPrices.Migrations
                         .HasForeignKey("IdProdus")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Produse_Electronice");
-                });
-
-            modelBuilder.Entity("DynamicPrices.Models.Stoc_Electronice", b =>
-                {
-                    b.HasOne("DynamicPrices.Models.Produse_Electronice", "Produse_Electronice")
-                        .WithMany()
-                        .HasForeignKey("IdProdus")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Produse_Electronice");
-                });
-
-            modelBuilder.Entity("DynamicPrices.Models.Vanzari_Electronice", b =>
-                {
-                    b.HasOne("DynamicPrices.Models.Clienti", "Clienti")
-                        .WithMany()
-                        .HasForeignKey("IdClient")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DynamicPrices.Models.Produse_Electronice", "Produse_Electronice")
-                        .WithMany()
-                        .HasForeignKey("IdProdus")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Clienti");
 
                     b.Navigation("Produse_Electronice");
                 });

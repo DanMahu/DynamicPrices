@@ -139,6 +139,19 @@ table tbody td:last-child {
     width: 14%;
 }
 
+.tabel-clienti tbody td {
+    font-size: 0.8vw;
+}
+
+.tabel-clienti tbody td:last-child {
+    text-align: center;
+}
+
+.custom-header5 th {
+    font-size: 0.9vw;
+    text-align: center;
+}
+
 table .btn-group {
     max-height: 6vh;
 }

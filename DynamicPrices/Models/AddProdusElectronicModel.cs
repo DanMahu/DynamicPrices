@@ -33,5 +33,17 @@ namespace DynamicPrices.Models
 
         [Required(ErrorMessage = "Descrierea produsului este obligatorie!")]
         public string Descriere { get; set; }
+
+        [Required(ErrorMessage = "Cantitatea produsului este obligatorie!")]
+        [Range(0, 10000, ErrorMessage = "Număr invalid!")]
+        public int InStoc { get; set; }
+
+        [Required(ErrorMessage = "Stocul minim este obligatoriu!")]
+        [Range(0, 10000, ErrorMessage = "Număr invalid!")]
+        public int StocMinim { get; set; }
+
+        [Required(ErrorMessage = "Stocul maxim este obligatoriu!")]
+        [Range(0, 10000, ErrorMessage = "Număr invalid!")]
+        public int StocMaxim { get; set; }
     }
 }

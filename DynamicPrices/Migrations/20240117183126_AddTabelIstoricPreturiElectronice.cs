@@ -12,14 +12,6 @@ namespace DynamicPrices.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "DataActualizare",
-                table: "preturi_electronice",
-                type: "datetime",
-                nullable: false,
-                oldClrType: typeof(DateTime),
-                oldType: "date");
-
             migrationBuilder.CreateTable(
                 name: "istoric_preturi_electronice",
                 columns: table => new
@@ -54,14 +46,6 @@ namespace DynamicPrices.Migrations
         {
             migrationBuilder.DropTable(
                 name: "istoric_preturi_electronice");
-
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "DataActualizare",
-                table: "preturi_electronice",
-                type: "date",
-                nullable: false,
-                oldClrType: typeof(DateTime),
-                oldType: "datetime");
         }
     }
 }

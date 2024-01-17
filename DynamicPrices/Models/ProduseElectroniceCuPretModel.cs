@@ -35,5 +35,11 @@ namespace DynamicPrices.Models
         [DisplayName("Preț Curent")]
         [Range(0.00, 999999.99, ErrorMessage = "Preț invalid!")]
         public decimal PretCurent { get; set; }
+
+        //
+        public int InStoc { get; set; }
+        public int StocMinim { get; set; }
+        public int StocMaxim { get; set; }
+
     }
 }

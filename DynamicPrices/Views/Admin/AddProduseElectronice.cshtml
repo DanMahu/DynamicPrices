@@ -7,42 +7,6 @@
 <link rel="stylesheet" href="~/css/admin-style.css" />
 <script src="~/js/script-admin.js"></script>
 
-@{
-    /*
-    <script>
-    fetch('/Admin/TipProduse')
-        .then(Response => Response.json())
-            .then(data => {
-            //alert(JSON.stringify(data));
-            const select = document.getElementById('select-type');
-            if (data && data.length > 0) {
-                select.innerHTML = '<option selected disabled>Selectează</option>';
-                data.forEach(element => {
-                    const option = document.createElement('option');
-                    option.value = element.TipProdus;
-                    option.innerHTML = element.TipProdus;
-                    select.appendChild(option);
-                });
-                const altTip = document.createElement('option');
-                altTip.value = 'new-type';
-                altTip.innerHTML = 'Tip nou';
-                select.appendChild(altTip);
-                } else {
-                document.getElementById('select-type').classList.add('d-none');
-                document.getElementById('input-new-type').classList.remove('d-none');
-                //const altTip = document.createElement('option');
-                altTip.value = 'new-type';
-                altTip.innerHTML = 'Tip nou';
-                select.appendChild(altTip);//
-}
-        })
-        .catch(error => {
-            console.error('Eroare: ', error);
-        });
-</script>
-     */
-}
-
 <div class="page-container">
     <div class="page-content pb-4">
         <div class="row px-0 m-0 pt-1">
@@ -84,6 +48,25 @@
                         <label asp-for="Descriere" class="p-0"></label>
                         <input asp-for="Descriere" type="text" autocomplete="off" class="form-control py-2" />
                         <span asp-validation-for="Descriere" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-2 mt-2">
+                        <label asp-for="StocMinim" class="p-0"></label>
+                        <input asp-for="StocMinim" type="text" autocomplete="off" class="form-control py-2" />
+                        <span asp-validation-for="StocMinim" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-3 mt-2">
+                        <label asp-for="StocMaxim" class="p-0"></label>
+                        <input asp-for="StocMaxim" type="text" autocomplete="off" class="form-control py-2" />
+                        <span asp-validation-for="StocMaxim" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-2 mt-2">
+                        <label asp-for="InStoc" class="p-0"></label>
+                        <input asp-for="InStoc" type="text" autocomplete="off" class="form-control py-2" />
+                        <span asp-validation-for="InStoc" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="row ms-0 pt-3" style="margin-right: 0.08rem">

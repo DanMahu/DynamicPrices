@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DynamicPrices.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240116214239_AddTabelIstoricPreturiElectronice")]
-    partial class AddTabelIstoricPreturiElectronice
+    [Migration("20240117183346_AddTabelStocElectronice")]
+    partial class AddTabelStocElectronice
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,6 +21,33 @@ namespace DynamicPrices.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "8.0.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            modelBuilder.Entity("DynamicPrices.Models.Clienti", b =>
+                {
+                    b.Property<int>("IdClient")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("Nume")
+                        .IsRequired()
+                        .HasColumnType("varchar(60)");
+
+                    b.Property<string>("Prenume")
+                        .IsRequired()
+                        .HasColumnType("varchar(60)");
+
+                    b.Property<string>("Telefon")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
+
+                    b.HasKey("IdClient");
+
+                    b.ToTable("clienti");
+                });
 
             modelBuilder.Entity("DynamicPrices.Models.Istoric_Preturi_Electronice", b =>
                 {
@@ -80,12 +107,12 @@ namespace DynamicPrices.Migrations
 
                     b.Property<string>("Descriere")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<string>("NumeProdus")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
+                        .HasMaxLength(150)
+                        .HasColumnType("varchar(150)");
 
                     b.Property<decimal>("PretRecomandat")
                         .HasColumnType("decimal(10,2)");
@@ -100,6 +127,31 @@ namespace DynamicPrices.Migrations
                     b.ToTable("produse_electronice");
                 });
 
+            modelBuilder.Entity("DynamicPrices.Models.Stoc_Electronice", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdProdus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("InStoc")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StocMaxim")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StocMinim")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdProdus");
+
+                    b.ToTable("stoc_electronice");
+                });
+
             modelBuilder.Entity("DynamicPrices.Models.Istoric_Preturi_Electronice", b =>
                 {
                     b.HasOne("DynamicPrices.Models.Produse_Electronice", "Produse_Electronice")
@@ -112,6 +164,17 @@ namespace DynamicPrices.Migrations
                 });
 
             modelBuilder.Entity("DynamicPrices.Models.Preturi_Electronice", b =>
+                {
+                    b.HasOne("DynamicPrices.Models.Produse_Electronice", "Produse_Electronice")
+                        .WithMany()
+                        .HasForeignKey("IdProdus")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Produse_Electronice");
+                });
+
+            modelBuilder.Entity("DynamicPrices.Models.Stoc_Electronice", b =>
                 {
                     b.HasOne("DynamicPrices.Models.Produse_Electronice", "Produse_Electronice")
                         .WithMany()

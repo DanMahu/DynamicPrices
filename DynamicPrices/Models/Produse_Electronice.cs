@@ -6,11 +6,10 @@ namespace DynamicPrices.Models
     public class Produse_Electronice
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdProdus { get; set; }
 
         [Required(ErrorMessage = "Numele produsului este obligatioriu!")]
-        [MaxLength(255)]
+        [MaxLength(150)]
         public string NumeProdus { get; set; }
 
         [Required(ErrorMessage = "Tipul produsului este obligatioriu!")]
@@ -24,7 +23,7 @@ namespace DynamicPrices.Models
         public decimal PretRecomandat {  get; set; }
 
         [Required(ErrorMessage = "Descrierea produsului este obligatorie!")]
-        [Column(TypeName = "TEXT")]
+        [Column(TypeName = "text")]
         public string Descriere { get; set; }
     }
 }

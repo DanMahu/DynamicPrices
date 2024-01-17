@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.MenuAdmin = false;
+    ViewBag.ShowFooter = false;
+}
+@model ProduseElectroniceCuPretModel
+
+<link rel="stylesheet" href="~/css/admin-style.css" />
+
+<div class="page-container">
+    <div class="page-content pb-4">
+        <div class="row px-0 m-0 pt-1">
+            <h3 class="text-primary my-3 ps-5">Șterge produsul electronic</h3> <hr />
+        </div>
+        <form method="post">
+            <input type="hidden" asp-for="IdProdus" />
+            <div class="form-content p-0">
+                <div class="row">
+                    <div class="col-md-6 mb-2 mt-2">
+                        <label asp-for="NumeProdus" class="p-0"></label>
+                        <input asp-for="NumeProdus" type="text" disabled autocomplete="off" class="form-control py-2" />
+                    </div>
+                    <div class="col-md-6 mb-2 mt-2">
+                        <label asp-for="TipProdus" class="p-0"></label>
+                        <input asp-for="TipProdus" type="text" disabled autocomplete="off" class="form-control py-2" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-2 mt-2">
+                        <label asp-for="CostProducere" class="p-0"></label>
+                        <input asp-for="CostProducere" type="text" disabled autocomplete="off" class="form-control py-2" />
+                    </div>
+                    <div class="col-md-6 mb-2 mt-2">
+                        <label asp-for="PretRecomandat" class="p-0"></label>
+                        <input asp-for="PretRecomandat" type="text" disabled autocomplete="off" class="form-control py-2" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-2 mt-2">
+                        <label asp-for="PretCurent" class="p-0"></label>
+                        <input asp-for="PretCurent" type="text" disabled autocomplete="off" class="form-control py-2" />
+                    </div>
+                    <div class="col-md-6 mb-3 mt-2">
+                        <label asp-for="Descriere" class="p-0"></label>
+                        <input asp-for="Descriere" type="text" disabled autocomplete="off" class="form-control py-2" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-2 mt-2">
+                        <label asp-for="StocMinim" class="p-0"></label>
+                        <input asp-for="StocMinim" type="text" disabled autocomplete="off" class="form-control py-2" />
+                    </div>
+                    <div class="col-md-6 mb-3 mt-2">
+                        <label asp-for="StocMaxim" class="p-0"></label>
+                        <input asp-for="StocMaxim" type="text" disabled autocomplete="off" class="form-control py-2" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-2 mt-2">
+                        <label asp-for="InStoc" class="p-0"></label>
+                        <input asp-for="InStoc" type="text" disabled autocomplete="off" class="form-control py-2" />
+                    </div>
+                </div>
+                <div class="row ms-0 pt-3" style="margin-right: 0.08rem">
+                    <div class="col-md-6 mb-2 mt-2">
+                        <button type="submit" class="btn btn-danger form-control">Șterge</button>
+                    </div>
+                    <div class="col-md-6 mb-3 mt-2">
+                        <a asp-controller="Admin" asp-action="ModProduseElectronice" class="btn btn-secondary form-control">Înapoi</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

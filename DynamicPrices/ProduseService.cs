@@ -162,7 +162,7 @@ namespace DynamicPrices
             int cantitate = 0;
             using (MySqlConnection conn = _databaseService.GetConnection())
             {
-                string sql = "select cantitate from stocuri_electronice where id_produs = @idProdus";
+                string sql = "select InStoc from stoc_electronice where IdProdus = @idProdus";
                 using (MySqlCommand command = new MySqlCommand(sql, conn))
                 {
                     command.Parameters.AddWithValue("idProdus", idProdus);
@@ -171,7 +171,7 @@ namespace DynamicPrices
                     {
                         while (reader.Read())
                         {
-                            cantitate = reader.GetInt32("cantitate");
+                            cantitate = reader.GetInt32("InStoc");
                         }
                     }
                 }
@@ -208,7 +208,7 @@ namespace DynamicPrices
             List<int> listaStoc = new List<int>();
             using (MySqlConnection conn = _databaseService.GetConnection())
             {
-                string sql = "select cantitate, stoc_minim, stoc_maxim from stocuri_electronice where id_produs = @idProdus";
+                string sql = "select InStoc, StocMinim, StocMaxim from stoc_electronice where IdProdus = @idProdus";
                 using (MySqlCommand command = new MySqlCommand(sql, conn))
                 {
                     command.Parameters.AddWithValue("idProdus", idProdus);
@@ -217,9 +217,9 @@ namespace DynamicPrices
                     {
                         while (reader.Read())
                         {
-                            listaStoc.Add(reader.GetInt32("cantitate"));
-                            listaStoc.Add(reader.GetInt32("stoc_minim"));
-                            listaStoc.Add(reader.GetInt32("stoc_maxim"));
+                            listaStoc.Add(reader.GetInt32("InStoc"));
+                            listaStoc.Add(reader.GetInt32("StocMinim"));
+                            listaStoc.Add(reader.GetInt32("StocMaxim"));
                         }
                     }
                 }
